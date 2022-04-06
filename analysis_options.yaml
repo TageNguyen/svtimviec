@@ -1,0 +1,25 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors: 
+    avoid_print: warning
+    dead_code: info
+    missing_return: error
+  language:
+    strict-raw-types: true
+
+linter:
+  rules:
+    avoid_print: true
+    prefer_single_quotes: true
+    missing_return: true
+    always_use_package_imports: true
+    avoid_empty_else: true
+    avoid_returning_null_for_future: true
+    avoid_type_to_string: true
+    cancel_subscriptions: true
+    close_sinks: true
+    prefer_void_to_null: true
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
