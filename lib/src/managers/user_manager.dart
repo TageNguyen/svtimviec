@@ -15,6 +15,11 @@ class UserManager {
     AppSharedPreferences.setAccessToken(null);
   }
 
+  Future<void> setAccessToken(String token) async {
+    globalToken = token;
+    AppSharedPreferences.setAccessToken(globalToken);
+  }
+
   Future<void> broadcastUser(User user) async {
     _currentUser.add(user);
   }
