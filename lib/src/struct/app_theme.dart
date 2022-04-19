@@ -30,6 +30,9 @@ class AppTheme {
     primaryIconTheme: iconTheme,
     backgroundColor: AppColors.tintLighter,
     indicatorColor: AppColors.darkBlue,
+    elevatedButtonTheme: elevatedButtonThemeData,
+    inputDecorationTheme: inputDecorationTheme,
+    textButtonTheme: textButtonThemeData,
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -69,6 +72,9 @@ class AppTheme {
     primaryIconTheme: iconTheme.copyWith(color: AppColors.white),
     backgroundColor: AppColors.black1A,
     indicatorColor: AppColors.black,
+    elevatedButtonTheme: elevatedButtonThemeData,
+    inputDecorationTheme: inputDecorationTheme,
+    textButtonTheme: textButtonThemeData,
   );
 
   static BottomSheetThemeData bottomSheetTheme = const BottomSheetThemeData(
@@ -106,5 +112,50 @@ class AppTheme {
   static IconThemeData iconTheme = const IconThemeData(
     color: AppColors.black,
     size: kDefaultIconSize,
+  );
+
+  static ElevatedButtonThemeData elevatedButtonThemeData =
+      ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      primary: AppColors.darkBlue,
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 14.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24.0),
+      ),
+      textStyle: AppTextStyles.whiteBold.copyWith(fontSize: 18),
+    ),
+  );
+
+  static InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
+    labelStyle: AppTextStyles.defaultRegular,
+    hintStyle: AppTextStyles.defaultRegular.copyWith(color: AppColors.grey),
+    contentPadding:
+        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+    filled: true,
+    isDense: true,
+    fillColor: AppColors.darkBlue.withOpacity(0.2),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(36.0),
+      borderSide: BorderSide.none,
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(36.0),
+      borderSide: BorderSide.none,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(36.0),
+      borderSide: BorderSide.none,
+    ),
+  );
+
+  static TextButtonThemeData textButtonThemeData = TextButtonThemeData(
+    style: TextButton.styleFrom(
+      elevation: 0.0,
+      backgroundColor: AppColors.noColor,
+      splashFactory: NoSplash.splashFactory,
+      primary: AppColors.darkBlue,
+      padding: EdgeInsets.zero,
+      textStyle: AppTextStyles.whiteBold.copyWith(color: AppColors.darkBlue),
+    ),
   );
 }
