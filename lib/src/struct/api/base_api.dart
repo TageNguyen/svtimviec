@@ -1,13 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:student_job_applying/src/managers/user_manager.dart';
+import 'package:student_job_applying/src/struct/api/api_util/api_url.dart';
 
 class BaseApi {
   BaseApi() {
-    // domain = ApiURL.domain;
+    domain = ApiUrl.localHost;
   }
 
   late String _domain;
@@ -16,87 +18,109 @@ class BaseApi {
 
   Future<dynamic> getMethod(url,
       {Map<String, String>? headers, Map<String, dynamic>? param}) async {
-    headers ??= <String, String>{};
+    try {
+      headers ??= <String, String>{};
 
-    headers.addAll({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ${UserManager.globalToken}'
-    });
-    _logRequest(url, 'GET', param, {}, headers);
-    Uri uri = Uri.parse('$_domain$url').replace(queryParameters: param);
-    http.Response response = await http.get(uri, headers: headers);
-    int statusCode = response.statusCode;
-    _logResponse(url, statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
-    return _handleResponse(statusCode, response);
+      headers.addAll({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${UserManager.globalToken}'
+      });
+      _logRequest(url, 'GET', param, {}, headers);
+      Uri uri = Uri.parse('$_domain$url').replace(queryParameters: param);
+      http.Response response = await http.get(uri, headers: headers);
+      int statusCode = response.statusCode;
+      _logResponse(
+          url, statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
+      return _handleResponse(statusCode, response);
+    } on SocketException catch (_) {
+      throw Exception('Connection error');
+    }
   }
 
   Future<dynamic> postMethod(url,
       {param, body, Map<String, String>? headers, noJsonEncode = false}) async {
-    headers ??= <String, String>{};
+    try {
+      headers ??= <String, String>{};
 
-    headers.addAll({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ${UserManager.globalToken}'
-    });
-    if (noJsonEncode) {
-      body = body;
-    } else {
-      body = json.encoder.convert(body);
+      headers.addAll({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${UserManager.globalToken}'
+      });
+      if (noJsonEncode) {
+        body = body;
+      } else {
+        body = json.encoder.convert(body);
+      }
+
+      _logRequest(url, 'POST', param, body, headers);
+      Uri uri = Uri.parse('$_domain$url').replace(queryParameters: param);
+      http.Response response =
+          await http.post(uri, headers: headers, body: body);
+      int statusCode = response.statusCode;
+      _logResponse(
+          url, statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
+      return _handleResponse(statusCode, response);
+    } on SocketException catch (_) {
+      throw Exception('Connection error');
     }
-
-    _logRequest(url, 'POST', param, body, headers);
-    Uri uri = Uri.parse('$_domain$url').replace(queryParameters: param);
-    http.Response response = await http.post(uri, headers: headers, body: body);
-    int statusCode = response.statusCode;
-    _logResponse(url, statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
-    return _handleResponse(statusCode, response);
   }
 
   Future<dynamic> putMethod(url,
       {param, body, Map<String, String>? headers, noJsonEncode = false}) async {
-    headers ??= <String, String>{};
+    try {
+      headers ??= <String, String>{};
 
-    headers.addAll({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ${UserManager.globalToken}'
-    });
+      headers.addAll({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${UserManager.globalToken}'
+      });
 
-    if (noJsonEncode) {
-      body = body;
-    } else {
-      body = json.encoder.convert(body);
+      if (noJsonEncode) {
+        body = body;
+      } else {
+        body = json.encoder.convert(body);
+      }
+
+      _logRequest(url, 'PUT', param, body, headers);
+      Uri uri = Uri.parse('$_domain$url').replace(queryParameters: param);
+      http.Response response =
+          await http.put(uri, headers: headers, body: body);
+      int statusCode = response.statusCode;
+      _logResponse(
+          url, statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
+      return _handleResponse(statusCode, response);
+    } on SocketException catch (_) {
+      throw Exception('Connection error');
     }
-
-    _logRequest(url, 'PUT', param, body, headers);
-    Uri uri = Uri.parse('$_domain$url').replace(queryParameters: param);
-    http.Response response = await http.put(uri, headers: headers, body: body);
-    int statusCode = response.statusCode;
-    _logResponse(url, statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
-    return _handleResponse(statusCode, response);
   }
 
   Future<dynamic> deleteMethod(url,
       {param, body, Map<String, String>? headers, noJsonEncode = false}) async {
-    headers ??= <String, String>{};
+    try {
+      headers ??= <String, String>{};
 
-    headers.addAll({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ${UserManager.globalToken}'
-    });
+      headers.addAll({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${UserManager.globalToken}'
+      });
 
-    if (noJsonEncode) {
-      body = body;
-    } else {
-      body = json.encoder.convert(body);
+      if (noJsonEncode) {
+        body = body;
+      } else {
+        body = json.encoder.convert(body);
+      }
+
+      _logRequest(url, 'DELETE', param, body, headers);
+      Uri uri = Uri.parse('$_domain$url').replace(queryParameters: param);
+      http.Response response =
+          await http.delete(uri, headers: headers, body: body);
+      int statusCode = response.statusCode;
+      _logResponse(
+          url, statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
+      return _handleResponse(statusCode, response);
+    } on SocketException catch (_) {
+      throw Exception('Connection error');
     }
-
-    _logRequest(url, 'DELETE', param, body, headers);
-    Uri uri = Uri.parse('$_domain$url').replace(queryParameters: param);
-    http.Response response =
-        await http.delete(uri, headers: headers, body: body);
-    int statusCode = response.statusCode;
-    _logResponse(url, statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
-    return _handleResponse(statusCode, response);
   }
 
   dynamic _handleResponse(int statusCode, http.Response response) {
