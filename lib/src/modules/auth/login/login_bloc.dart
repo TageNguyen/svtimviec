@@ -1,6 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:student_job_applying/src/models/enums/type_role.dart';
 import 'package:student_job_applying/src/models/request_models/login_request_model.dart';
+import 'package:student_job_applying/src/models/response_models/login_response_model.dart';
 import 'package:student_job_applying/src/modules/auth/api/auth_api.dart';
 import 'package:student_job_applying/src/struct/base_bloc.dart';
 
@@ -33,7 +34,7 @@ class LoginBloC extends BloC {
   set typeRole(TypeRole value) => requestModel.typeRole = value;
 
   // request login and return token if success
-  Future<String> login() async {
+  Future<LoginResponseModel> login() async {
     return authApi.login(requestModel);
   }
 

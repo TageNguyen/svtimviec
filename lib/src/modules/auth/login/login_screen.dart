@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:provider/provider.dart';
 import 'package:student_job_applying/src/managers/user_manager.dart';
+import 'package:student_job_applying/src/models/response_models/login_response_model.dart';
 import 'package:student_job_applying/src/modules/auth/login/login_bloc.dart';
 import 'package:student_job_applying/src/modules/auth/widgets/type_role_checkbox.dart';
 import 'package:student_job_applying/src/struct/routes/route_names.dart';
@@ -194,8 +195,8 @@ class _LoginScreenState extends State<LoginScreen> {
   /// save token if success
   Future<void> _login(BuildContext context) async {
     showLoading(context);
-    String token = await bloC.login();
-    await userManager.setAccessToken(token);
+    LoginResponseModel result = await bloC.login();
+    await userManager.setAccessToken(result.token);
     Navigator.of(context).pop(); // hide loading
   }
 }
