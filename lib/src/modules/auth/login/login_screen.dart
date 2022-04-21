@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:student_job_applying/src/managers/user_manager.dart';
 import 'package:student_job_applying/src/modules/auth/login/login_bloc.dart';
 import 'package:student_job_applying/src/modules/auth/widgets/type_role_checkbox.dart';
+import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/image_paths.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
@@ -69,9 +70,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 12.0),
                   _buildPasswordInputField(context),
                   const SizedBox(height: 5.0),
-                  TypeRoleCheckBox(onChanged: (type) {
-                    bloC.typeRole = type;
-                  }),
+                  TypeRoleCheckBox(
+                      title: AppStrings.loginAsRecruiter,
+                      onChanged: (type) {
+                        bloC.typeRole = type;
+                      }),
                   const SizedBox(height: 32.0),
                   _buildButtons(context),
                 ],
@@ -106,6 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
       controller: _emailController,
       hintText: AppStrings.email,
       keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.next,
       onSubmitted: (value) => _passwordNode.requestFocus(),
       onChanged: (email) => bloC.email = email,
     );
@@ -121,6 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
           focusNode: _passwordNode,
           hintText: AppStrings.password,
           keyboardType: TextInputType.visiblePassword,
+          textInputAction: TextInputAction.done,
           obscureText: hidePassword,
           suffixIcon: IconButton(
             onPressed: bloC.changeEyeButtonStatus,
@@ -166,7 +171,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildRegisterButton(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        // move to register page
+        Navigator.pushNamed(context, RouteNames.register);
+      },
       child: const Text(AppStrings.registerAccount),
     );
   }

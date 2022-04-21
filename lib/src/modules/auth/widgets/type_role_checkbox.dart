@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:student_job_applying/src/models/enums/type_role.dart';
 import 'package:student_job_applying/src/utils/app_style/app_colors.dart';
-import 'package:student_job_applying/src/utils/utils.dart';
 
 class TypeRoleCheckBox extends StatefulWidget {
+  final String title;
   final void Function(TypeRole value) onChanged;
-  const TypeRoleCheckBox({Key? key, required this.onChanged}) : super(key: key);
+  const TypeRoleCheckBox(
+      {Key? key, required this.onChanged, required this.title})
+      : super(key: key);
 
   @override
   _TypeRoleCheckBoxState createState() => _TypeRoleCheckBoxState();
@@ -24,7 +26,7 @@ class _TypeRoleCheckBoxState extends State<TypeRoleCheckBox> {
           value: isChecked,
           onChanged: _onChanged,
         ),
-        const Expanded(child: Text(AppStrings.loginAsRecruiter)),
+        Expanded(child: Text(widget.title)),
       ],
     );
   }

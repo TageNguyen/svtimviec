@@ -11,6 +11,7 @@ class InputTextField extends StatelessWidget {
   final void Function(String value)? onSubmitted;
   final void Function()? onTap;
   final TextCapitalization textCapitalization;
+  final TextInputAction? textInputAction;
   final Widget? suffixIcon;
   final bool readOnly;
   final bool obscureText;
@@ -28,7 +29,8 @@ class InputTextField extends StatelessWidget {
       this.suffixIcon,
       this.readOnly = false,
       this.obscureText = false,
-      this.onTap})
+      this.onTap,
+      this.textInputAction})
       : super(key: key);
 
   @override
@@ -39,6 +41,7 @@ class InputTextField extends StatelessWidget {
       keyboardType: keyboardType,
       style: Theme.of(context).textTheme.bodyText2,
       textCapitalization: textCapitalization,
+      textInputAction: textInputAction,
       cursorColor: AppColors.black,
       maxLength: maxLength,
       readOnly: readOnly,
