@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:student_job_applying/src/modules/main/main_bloc.dart';
 import 'package:student_job_applying/src/modules/main/main_screen.dart';
 
 class Main extends StatelessWidget {
@@ -8,7 +9,9 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: const [],
+      providers: [
+        Provider<MainBloC>(create: (context) => MainBloC()),
+      ],
       child: const MainScreen(),
     );
   }

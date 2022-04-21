@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:student_job_applying/src/modules/auth/verify_email/verify_email_bloc.dart';
+import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 import 'package:student_job_applying/src/widgets/input_text_field.dart';
@@ -120,8 +121,8 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
     showLoading(context);
     await bloC.verifyEmail();
     Navigator.of(context).pop(); // hide loading
-    debugPrint('verifyEmail success --> move to main page');
-    // Navigator.pushNamedAndRemoveUntil(context, RouteNames.verifyEmail,
-    // arguments: userId); // move to verify email page
+    // remove current pages and move to main page
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        RouteNames.main, (Route<dynamic> route) => false);
   }
 }

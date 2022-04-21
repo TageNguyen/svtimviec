@@ -194,7 +194,9 @@ class _LoginScreenState extends State<LoginScreen> {
   void moveToNewPage(int? userId) {
     bool isVerified = userId == null;
     if (isVerified) {
-      debugPrint('account verified, login success --> move to main page');
+      // remove current pages and move to main page
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          RouteNames.main, (Route<dynamic> route) => false);
     } else {
       Navigator.pushNamed(context, RouteNames.verifyEmail, arguments: userId);
     }
