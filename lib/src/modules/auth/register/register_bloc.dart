@@ -13,7 +13,7 @@ class RegisterBloC extends BloC {
   final _eyeButtonObject = BehaviorSubject<bool>.seeded(true);
   Stream<bool> get eyeButtonStatusStream => _eyeButtonObject.stream;
 
-  // manage login button status (enable/disable)
+  // manage register button status (enable/disable)
   final _registerButtonObject = BehaviorSubject<bool>();
   Stream<bool> get registerButtonStatusStream => _registerButtonObject.stream;
 

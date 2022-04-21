@@ -3,6 +3,7 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:provider/provider.dart';
 import 'package:student_job_applying/src/modules/auth/register/register_bloc.dart';
 import 'package:student_job_applying/src/modules/auth/widgets/type_role_checkbox.dart';
+import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 import 'package:student_job_applying/src/widgets/input_text_field.dart';
@@ -237,5 +238,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     showLoading(context);
     int userId = await bloC.register();
     Navigator.of(context).pop(); // hide loading
+    Navigator.pushNamed(context, RouteNames.verifyEmail,
+        arguments: userId); // move to verify email page
   }
 }

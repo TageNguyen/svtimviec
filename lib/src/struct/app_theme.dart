@@ -5,7 +5,7 @@ import 'package:student_job_applying/src/utils/app_style/app_text_styles.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: AppColors.tintLighter,
+    scaffoldBackgroundColor: AppColors.white,
     platform: TargetPlatform.iOS,
     fontFamily: 'GoogleSans',
     textTheme: TextTheme(

@@ -6,4 +6,5 @@ class ApiUrl {
   // auth
   static const login = '/auth/login';
   static const register = '/auth/register';
+  static const verifyEmail = '/auth/confirm-email';
 }

@@ -191,12 +191,22 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  void moveToNewPage(int? userId) {
+    bool isVerified = userId == null;
+    if (isVerified) {
+      debugPrint('account verified, login success --> move to main page');
+    } else {
+      Navigator.pushNamed(context, RouteNames.verifyEmail, arguments: userId);
+    }
+  }
+
   /// send login request
-  /// save token if success
+  /// save token and move to new page if success
   Future<void> _login(BuildContext context) async {
     showLoading(context);
     LoginResponseModel result = await bloC.login();
     await userManager.setAccessToken(result.token);
     Navigator.of(context).pop(); // hide loading
+    moveToNewPage(result.userId);
   }
 }

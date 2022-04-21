@@ -15,6 +15,8 @@ class InputTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool readOnly;
   final bool obscureText;
+  final bool autofocus;
+  final Color? fillColor;
 
   const InputTextField(
       {Key? key,
@@ -30,7 +32,9 @@ class InputTextField extends StatelessWidget {
       this.readOnly = false,
       this.obscureText = false,
       this.onTap,
-      this.textInputAction})
+      this.textInputAction,
+      this.autofocus = false,
+      this.fillColor})
       : super(key: key);
 
   @override
@@ -38,6 +42,7 @@ class InputTextField extends StatelessWidget {
     return TextField(
       controller: controller,
       focusNode: focusNode,
+      autofocus: autofocus,
       keyboardType: keyboardType,
       style: Theme.of(context).textTheme.bodyText2,
       textCapitalization: textCapitalization,
@@ -50,6 +55,7 @@ class InputTextField extends StatelessWidget {
         labelText: hintText,
         counterText: '',
         suffixIcon: suffixIcon,
+        fillColor: fillColor,
         floatingLabelBehavior: FloatingLabelBehavior.never,
       ),
       onTap: onTap,
