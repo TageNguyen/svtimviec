@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:student_job_applying/src/managers/user_manager.dart';
 import 'package:student_job_applying/src/models/user.dart';
-import 'package:student_job_applying/src/modules/auth/auth.dart';
 import 'package:student_job_applying/src/modules/main/main.dart';
+import 'package:student_job_applying/src/modules/auth/login/login_page.dart';
 
 /// the root of app
 class AppRoot extends StatelessWidget {
@@ -17,7 +17,7 @@ class AppRoot extends StatelessWidget {
         if (logged) {
           return const Main();
         } else {
-          return const Auth();
+          return const LoginPage();
         }
       },
       stream: context.read<UserManager>().currentUser,

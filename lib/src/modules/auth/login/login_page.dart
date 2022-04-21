@@ -4,8 +4,8 @@ import 'package:student_job_applying/src/modules/auth/api/auth_api.dart';
 import 'package:student_job_applying/src/modules/auth/login/login_bloc.dart';
 import 'package:student_job_applying/src/modules/auth/login/login_screen.dart';
 
-class Auth extends StatelessWidget {
-  const Auth({Key? key}) : super(key: key);
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
