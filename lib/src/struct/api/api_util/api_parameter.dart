@@ -5,4 +5,6 @@ class ApiParameter {
   static const typeRole = 'type_role';
   static const confirmPassword = 'confirm_password';
   static const name = 'name';
+  static const userId = 'user_id';
+  static const verifyCode = 'verify_code';
 }
