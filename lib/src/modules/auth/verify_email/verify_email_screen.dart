@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:student_job_applying/src/managers/user_manager.dart';
 import 'package:student_job_applying/src/modules/auth/verify_email/verify_email_bloc.dart';
-import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 import 'package:student_job_applying/src/widgets/input_text_field.dart';
@@ -17,10 +17,12 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
   final TextEditingController _verifyCodeController = TextEditingController();
 
   late VerifyEmailBloC bloC;
+  late UserManager userManager;
 
   @override
   void initState() {
     bloC = context.read<VerifyEmailBloC>();
+    userManager = context.read<UserManager>();
     super.initState();
   }
 
@@ -63,6 +65,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
         return ElevatedButton(
           onPressed: isEnable
               ? () {
+                  FocusScope.of(context).unfocus();
                   _verifyEmail(context).catchError((error) {
                     Navigator.pop(context); // hide loading
                     showNotificationDialog(context, error.message);
@@ -121,8 +124,10 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
     showLoading(context);
     await bloC.verifyEmail();
     Navigator.of(context).pop(); // hide loading
-    // remove current pages and move to main page
-    Navigator.of(context).pushNamedAndRemoveUntil(
-        RouteNames.main, (Route<dynamic> route) => false);
+    showNotificationDialog(
+            context, AppStrings.verifyEmailSuccessPleaseLoginToContinue)
+        .then((_) {
+      Navigator.popUntil(context, ModalRoute.withName('/'));
+    });
   }
 }

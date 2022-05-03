@@ -1,7 +1,7 @@
 // this file contains all of constant used for whole app
 
 // app title
-const String kAppTitle = 'Sinh Viên làm thêm';
+const String kAppTitle = 'Sinh Viên tìm việc';
 
 // default fontsize for text
 const double kDefaultFontSize = 16.0;

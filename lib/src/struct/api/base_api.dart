@@ -9,7 +9,7 @@ import 'package:student_job_applying/src/struct/api/api_util/api_url.dart';
 
 class BaseApi {
   BaseApi() {
-    domain = ApiUrl.localHost;
+    domain = ApiUrl.domain;
   }
 
   late String _domain;
@@ -20,7 +20,6 @@ class BaseApi {
       {Map<String, String>? headers, Map<String, dynamic>? param}) async {
     try {
       headers ??= <String, String>{};
-
       headers.addAll({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${UserManager.globalToken}'
@@ -31,35 +30,66 @@ class BaseApi {
       int statusCode = response.statusCode;
       _logResponse(
           url, statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
-      return _handleResponse(statusCode, response);
+      return _handleResponse(
+          statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
     } on SocketException catch (_) {
       throw Exception('Connection error');
     }
   }
 
   Future<dynamic> postMethod(url,
-      {param, body, Map<String, String>? headers, noJsonEncode = false}) async {
+      {param,
+      Map<String, dynamic>? body,
+      Map<String, String>? headers,
+      noJsonEncode = false}) async {
     try {
       headers ??= <String, String>{};
+      body ??= <String, dynamic>{};
+      Map<String, File> fileMap = {};
+      Map<String, String> _body = {};
 
       headers.addAll({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${UserManager.globalToken}'
       });
-      if (noJsonEncode) {
-        body = body;
-      } else {
-        body = json.encoder.convert(body);
-      }
+
+      body.removeWhere(
+        (key, value) {
+          if (value is File) {
+            fileMap.addAll({key: value});
+            return true;
+          }
+          return false;
+        },
+      );
+
+      body.forEach((key, value) => _body[key] = '$value');
 
       _logRequest(url, 'POST', param, body, headers);
+
       Uri uri = Uri.parse('$_domain$url').replace(queryParameters: param);
-      http.Response response =
-          await http.post(uri, headers: headers, body: body);
+      var request = http.MultipartRequest('POST', uri);
+
+      request.headers.addAll(headers);
+      request.fields.addAll(_body);
+      if (fileMap.isNotEmpty) {
+        fileMap.forEach((key, value) async {
+          request.files.add(
+            await http.MultipartFile.fromPath(
+              key,
+              value.path,
+            ),
+          );
+        });
+      }
+      var response = await request.send();
+      String responseBody = await response.stream.bytesToString();
+
+      // http.Response response =
+      //     await http.post(uri, headers: headers, body: body);
       int statusCode = response.statusCode;
-      _logResponse(
-          url, statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
-      return _handleResponse(statusCode, response);
+      _logResponse(url, statusCode, jsonDecode(responseBody));
+      return _handleResponse(statusCode, jsonDecode(responseBody));
     } on SocketException catch (_) {
       throw Exception('Connection error');
     }
@@ -88,7 +118,8 @@ class BaseApi {
       int statusCode = response.statusCode;
       _logResponse(
           url, statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
-      return _handleResponse(statusCode, response);
+      return _handleResponse(
+          statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
     } on SocketException catch (_) {
       throw Exception('Connection error');
     }
@@ -117,22 +148,23 @@ class BaseApi {
       int statusCode = response.statusCode;
       _logResponse(
           url, statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
-      return _handleResponse(statusCode, response);
+      return _handleResponse(
+          statusCode, jsonDecode(utf8.decode(response.bodyBytes)));
     } on SocketException catch (_) {
       throw Exception('Connection error');
     }
   }
 
-  dynamic _handleResponse(int statusCode, http.Response response) {
+  dynamic _handleResponse(int statusCode, responseBody) {
     if (200 >= statusCode && statusCode <= 299) {
-      return jsonDecode(utf8.decode(response.bodyBytes));
+      return responseBody;
     }
     if (statusCode == 401 || statusCode == 403) {
       throw Exception('Token expired');
     }
     if (400 <= statusCode && statusCode <= 499) {
-      throw Exception(jsonDecode(utf8.decode(response.bodyBytes))['message']);
-    } else if (500 <= response.statusCode && response.statusCode <= 599) {
+      throw Exception(responseBody['message']);
+    } else if (500 <= statusCode && statusCode <= 599) {
       throw Exception('Server Error');
     }
     throw Exception('Unhandled error');

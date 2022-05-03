@@ -1,4 +1,5 @@
 import 'package:rxdart/rxdart.dart';
+import 'package:student_job_applying/src/models/user.dart';
 import 'package:student_job_applying/src/modules/auth/api/auth_api.dart';
 import 'package:student_job_applying/src/struct/base_bloc.dart';
 
@@ -23,6 +24,11 @@ class VerifyEmailBloC extends BloC {
   // request verify
   Future<void> verifyEmail() async {
     return authApi.verifyEmail(userId, _verifyCode);
+  }
+
+  /// get user informations
+  Future<User> getCurrentUserInformations() {
+    return authApi.getCurrentUserInformations();
   }
 
   @override

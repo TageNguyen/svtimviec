@@ -7,4 +7,8 @@ class ApiUrl {
   static const login = '/auth/login';
   static const register = '/auth/register';
   static const verifyEmail = '/auth/confirm-email';
+  static const getCurrentUserInformations = '/user/info';
+
+  // user
+  static const updateRequiredInformations = '/user/update-requirement-infos';
 }

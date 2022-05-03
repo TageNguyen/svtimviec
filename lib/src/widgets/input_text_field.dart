@@ -32,7 +32,7 @@ class InputTextField extends StatelessWidget {
       this.readOnly = false,
       this.obscureText = false,
       this.onTap,
-      this.textInputAction,
+      this.textInputAction = TextInputAction.next,
       this.autofocus = false,
       this.fillColor})
       : super(key: key);

@@ -31,6 +31,9 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     bloC = context.read<LoginBloC>();
     userManager = context.read<UserManager>();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      getUserInformations();
+    });
     super.initState();
   }
 
@@ -194,12 +197,32 @@ class _LoginScreenState extends State<LoginScreen> {
   void moveToNewPage(int? userId) {
     bool isVerified = userId == null;
     if (isVerified) {
-      // remove current pages and move to main page
-      Navigator.of(context).pushNamedAndRemoveUntil(
-          RouteNames.main, (Route<dynamic> route) => false);
+      getUserInformations();
     } else {
       Navigator.pushNamed(context, RouteNames.verifyEmail, arguments: userId);
     }
+  }
+
+  void getUserInformations() async {
+    await userManager.getAccessToken();
+    await userManager.getTypeRole();
+    if (UserManager.globalToken.isEmpty) {
+      return;
+    }
+    showLoading(context, message: AppStrings.loadingUserInformations);
+    bloC.getCurrentUserInformations().then((userData) {
+      Navigator.of(context).pop(); // hide loading
+      userManager.broadcastUser(userData);
+    }).catchError((error) {
+      Navigator.of(context).pop(); // hide loading
+      if (error.message ==
+          AppStrings.youHaveToUpdateInformationsToUseApplication) {
+        Navigator.pushReplacementNamed(
+            context, RouteNames.updateRequiredInformations);
+      } else {
+        showNotificationDialog(context, error.message);
+      }
+    });
   }
 
   /// send login request
@@ -208,6 +231,7 @@ class _LoginScreenState extends State<LoginScreen> {
     showLoading(context);
     LoginResponseModel result = await bloC.login();
     await userManager.setAccessToken(result.token);
+    await userManager.setTypeRole(bloC.requestModel.typeRole);
     Navigator.of(context).pop(); // hide loading
     moveToNewPage(result.userId);
   }

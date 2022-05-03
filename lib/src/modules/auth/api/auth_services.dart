@@ -1,6 +1,8 @@
 import 'package:student_job_applying/src/models/request_models/login_request_model.dart';
 import 'package:student_job_applying/src/models/request_models/register_request_model.dart';
+import 'package:student_job_applying/src/models/request_models/required_informations_request_model.dart';
 import 'package:student_job_applying/src/models/response_models/login_response_model.dart';
+import 'package:student_job_applying/src/models/user.dart';
 import 'package:student_job_applying/src/modules/auth/api/auth_api.dart';
 import 'package:student_job_applying/src/struct/api/api_util/api_parameter.dart';
 import 'package:student_job_applying/src/struct/api/api_util/api_url.dart';
@@ -28,5 +30,20 @@ class AuthServices extends AuthApi {
       ApiParameter.userId: '$userId',
       ApiParameter.verifyCode: verifyCode,
     });
+  }
+
+  @override
+  Future<User> getCurrentUserInformations() {
+    return getMethod(ApiUrl.getCurrentUserInformations)
+        .then((res) => User.fromJson(res['data']));
+  }
+
+  @override
+  Future<void> updateRequiredInformations(
+      RequiredInformationsRequestModel model) {
+    return postMethod(
+      ApiUrl.updateRequiredInformations,
+      body: model.toJson(),
+    );
   }
 }

@@ -88,11 +88,12 @@ class AppTheme {
   );
 
   static AppBarTheme appBarTheme = AppBarTheme(
-    color: Colors.white,
-    titleTextStyle: AppTextStyles.defaultSemibold,
-    centerTitle: true,
+    backgroundColor: AppColors.black,
+    titleTextStyle:
+        AppTextStyles.defaultSemibold.copyWith(color: AppColors.white),
+    centerTitle: false,
     elevation: 0,
-    iconTheme: iconTheme,
+    iconTheme: iconTheme.copyWith(color: AppColors.white),
     actionsIconTheme: iconTheme,
   );
 

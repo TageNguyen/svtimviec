@@ -2,7 +2,8 @@
     package="com.example.student_job_applying">
    <application
         android:label="student_job_applying"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
