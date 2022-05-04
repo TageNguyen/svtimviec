@@ -6,6 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 
+const loadingWidget = Center(
+  child: CircularProgressIndicator(),
+);
+
+Widget errorScreen({String? message}) {
+  return Center(
+    child: Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Text(message ?? AppStrings.anErrorHasOccurred),
+    ),
+  );
+}
+
 Widget buildNetworkCircleAvatar(String url, {double size = 32.0}) {
   return Container(
     height: size,
@@ -49,5 +62,17 @@ Widget buildFileCircleAvatar(File? file, {double size = 32.0}) {
         fit: BoxFit.cover,
       ),
     ),
+  );
+}
+
+Widget buildNetworkImage(String url) {
+  return FadeInImage(
+    image: NetworkImage(url),
+    placeholder: const AssetImage(ImagePaths.avatarPlaceholder),
+    imageErrorBuilder: (context, error, stackTrace) {
+      return Image.asset(ImagePaths.companyPlaceholderImage,
+          fit: BoxFit.contain);
+    },
+    fit: BoxFit.cover,
   );
 }

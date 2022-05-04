@@ -16,4 +16,11 @@ class ApiParameter {
   static const provinceId = 'provinceID';
   static const companyName = 'company_name';
   static const companyImage = 'company_image';
+  static const page = 'page';
+  static const salaryType = 'salary_type';
+  static const salaryFrom = 'salary_from';
+  static const salaryTo = 'salary_to';
+  static const minAge = 'min_age';
+  static const search = 'search';
+  static const reason = 'reason';
 }

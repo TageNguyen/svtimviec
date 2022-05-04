@@ -40,4 +40,11 @@ class AppStrings {
   static const search = 'Tìm kiếm';
   static const verifyEmailSuccessPleaseLoginToContinue =
       'Xác thực email thành công, vui lòng đăng nhập để tiếp tục';
+  static const wageSalary = 'Lương thỏa thuận';
+  static const fixedSalary = 'Lương cố định';
+  static const anErrorHasOccurred = 'Đã có lỗi xảy ra';
+  static const requirement = 'Yêu cầu';
+  static const from = 'Từ';
+  static const pleaseContactUsAt = 'Vui lòng liên hệ chúng tôi tại';
+  static const orByEmailAddress = 'hoặc bằng địa chỉ email';
 }

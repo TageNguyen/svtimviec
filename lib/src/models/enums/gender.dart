@@ -1,6 +1,6 @@
 import 'package:student_job_applying/src/utils/app_strings.dart';
 
-enum Gender { male, female }
+enum Gender { male, female, unknown }
 
 extension GenderEX on Gender {
   int get rawData {
@@ -16,8 +16,10 @@ extension GenderEX on Gender {
     switch (index) {
       case 0:
         return Gender.female;
-      default:
+      case 1:
         return Gender.male;
+      default:
+        return Gender.unknown;
     }
   }
 
@@ -28,7 +30,7 @@ extension GenderEX on Gender {
       case Gender.male:
         return AppStrings.male;
       default:
-        return toString();
+        return '';
     }
   }
 }
