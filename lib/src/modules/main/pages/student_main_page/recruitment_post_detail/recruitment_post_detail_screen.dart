@@ -21,67 +21,72 @@ class RecruitmentPostDetailScreen extends StatelessWidget {
     getRecruitmentPostDetail(context);
     return KeyboardDismisser(
       child: Scaffold(
-        body: StreamBuilder<RecruitmentPost>(
-          stream: context.read<RecruitmentPostDetailBloC>().recruitmentDetail,
-          initialData:
-              context.read<RecruitmentPostDetailBloC>().recruitmentPost,
-          builder: (context, snapshot) {
-            RecruitmentPost post = snapshot.data!;
-            return SingleChildScrollView(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _buildCompanyImage(context, post.recruiter?.companyImage),
-                  Text(
-                    '${post.createdAt?.ddmmyyyy}',
-                    style: AppTextStyles.greyRegular.copyWith(fontSize: 14),
+        body: Stack(
+          children: [
+            StreamBuilder<RecruitmentPost>(
+              stream:
+                  context.read<RecruitmentPostDetailBloC>().recruitmentDetail,
+              initialData:
+                  context.read<RecruitmentPostDetailBloC>().recruitmentPost,
+              builder: (context, snapshot) {
+                RecruitmentPost post = snapshot.data!;
+                return SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0, vertical: 24.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _buildCompanyImage(context, post.recruiter?.companyImage),
+                      Text(
+                        '${post.createdAt?.ddmmyyyy}',
+                        style: AppTextStyles.greyRegular.copyWith(fontSize: 14),
+                      ),
+                      const SizedBox(height: 8.0),
+                      Text(
+                        '${post.recruiter?.companyName} ${AppStrings.hire}: ',
+                        style: AppTextStyles.defaultSemibold,
+                      ),
+                      const SizedBox(height: 8.0),
+                      Text(
+                        '${post.jobName}',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      const SizedBox(height: 4.0),
+                      Text(
+                        '${post.jobDescription}',
+                      ),
+                      const SizedBox(height: 4.0),
+                      _buildSalaryInformations(context, post),
+                      const SizedBox(height: 4.0),
+                      _buildRequiredInformations(context, post),
+                      const SizedBox(height: 12.0),
+                      _buildRecruiterInformations(context, post.recruiter),
+                      const SizedBox(height: 4.0),
+                      _buildContactAddress(context, post),
+                      const SizedBox(height: 16.0),
+                      _buildButtons(context),
+                      const SizedBox(height: 16.0),
+                      RecruitmentPostComment(listReport: post.reports),
+                    ],
                   ),
-                  const SizedBox(height: 8.0),
-                  Text(
-                    '${post.recruiter?.companyName} ${AppStrings.hire}: ',
-                    style: AppTextStyles.defaultSemibold,
-                  ),
-                  const SizedBox(height: 8.0),
-                  Text(
-                    '${post.jobName}',
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  const SizedBox(height: 4.0),
-                  Text(
-                    '${post.jobDescription}',
-                  ),
-                  const SizedBox(height: 4.0),
-                  _buildSalaryInformations(context, post),
-                  const SizedBox(height: 4.0),
-                  _buildRequiredInformations(context, post),
-                  const SizedBox(height: 12.0),
-                  _buildRecruiterInformations(context, post.recruiter),
-                  const SizedBox(height: 4.0),
-                  _buildContactAddress(context, post),
-                  const SizedBox(height: 16.0),
-                  _buildButtons(context),
-                  const SizedBox(height: 16.0),
-                  RecruitmentPostComment(listReport: post.reports),
-                ],
-              ),
-            );
-          },
+                );
+              },
+            ),
+            const Positioned(
+              top: 28.0,
+              left: 4.0,
+              child: BackButton(),
+            ),
+          ],
         ),
       ),
     );
   }
 
   Widget _buildCompanyImage(BuildContext context, String? companyImage) {
-    return Stack(
-      children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height / 3,
-          child: buildNetworkImage(companyImage ?? ''),
-        ),
-        const BackButton(),
-      ],
+    return SizedBox(
+      height: MediaQuery.of(context).size.height / 3,
+      child: buildNetworkImage(companyImage ?? ''),
     );
   }
 
