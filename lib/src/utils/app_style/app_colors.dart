@@ -10,4 +10,5 @@ class AppColors {
   static const darkBlue = Color(0xFF0E2656);
   static const tintGreyLight = Color(0xffD0D5DD);
   static const noColor = Colors.transparent;
+  static const Color primaryBlue = Color.fromARGB(255, 20, 114, 255);
 }

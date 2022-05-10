@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:student_job_applying/src/constants.dart';
@@ -9,21 +10,35 @@ import 'package:student_job_applying/src/modules/main/widgets/search_bar.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 
-class StudentMainScreen extends StatelessWidget {
+class StudentMainScreen extends StatefulWidget {
+  const StudentMainScreen({Key? key}) : super(key: key);
+
+  @override
+  State<StudentMainScreen> createState() => _StudentMainScreenState();
+}
+
+class _StudentMainScreenState extends State<StudentMainScreen> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
-  StudentMainScreen({Key? key}) : super(key: key);
+
+  @override
+  void initState() {
+    context.read<StudentMainPageBloC>().getRecruitmentPosts();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    context.read<StudentMainPageBloC>().getRecruitmentPosts();
-    return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          _buildBackgroundImage(context),
-          _buildScrollableBody(context),
-        ],
+    return KeyboardDismisser(
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            _buildBackgroundImage(context),
+            _buildScrollableBody(context),
+          ],
+        ),
       ),
     );
   }
@@ -79,7 +94,7 @@ class StudentMainScreen extends StatelessWidget {
   }
 
   Widget _buildRecruitmentPostsList(BuildContext context) {
-    return StreamBuilder<List<RecruitmentPost>>(
+    return StreamBuilder<List<RecruitmentPost>?>(
       stream: context.read<StudentMainPageBloC>().recruitmentPosts,
       builder: (_, snapshot) {
         if (!snapshot.hasData) {
@@ -88,6 +103,11 @@ class StudentMainScreen extends StatelessWidget {
           );
         }
         List<RecruitmentPost> posts = snapshot.data!;
+        if (posts.isEmpty) {
+          return const SliverFillRemaining(
+            child: emptyMessage,
+          );
+        }
         return SliverPadding(
           padding: const EdgeInsets.symmetric(vertical: 12.0),
           sliver: SliverList(

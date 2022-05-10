@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:student_job_applying/src/modules/main/pages/student_main_page/student_main_page_bloc.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 
@@ -20,9 +22,13 @@ class _SearchBarState extends State<SearchBar> {
         cursorColor: Colors.white,
         controller: _searchController,
         keyboardType: TextInputType.text,
+        textInputAction: TextInputAction.search,
         onChanged: (keyword) {
-          // context.read<ManageUserBloC>().filter(keyword);
+          context.read<StudentMainPageBloC>().keyword = keyword.trim();
         },
+        onSubmitted: (_) => context
+            .read<StudentMainPageBloC>()
+            .getRecruitmentPosts(isRefresh: true),
         style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w400,

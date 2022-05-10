@@ -23,4 +23,6 @@ class ApiParameter {
   static const minAge = 'min_age';
   static const search = 'search';
   static const reason = 'reason';
+  static const perPage = 'per_page';
+  static const id = 'id';
 }

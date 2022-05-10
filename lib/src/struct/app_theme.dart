@@ -97,16 +97,13 @@ class AppTheme {
     actionsIconTheme: iconTheme,
   );
 
-  static DialogTheme dialogTheme = const DialogTheme(
+  static DialogTheme dialogTheme = DialogTheme(
     backgroundColor: AppColors.white,
     contentTextStyle: AppTextStyles.defaultRegular,
     titleTextStyle: AppTextStyles.defaultSemibold,
     elevation: 24.0,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(8.0),
-        topRight: Radius.circular(8.0),
-      ),
+      borderRadius: BorderRadius.circular(8.0),
     ),
   );
 

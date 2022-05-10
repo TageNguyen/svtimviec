@@ -4,6 +4,7 @@ import 'package:student_job_applying/src/models/enums/gender.dart';
 import 'package:student_job_applying/src/models/enums/salary_type.dart';
 import 'package:student_job_applying/src/models/recruitment_post.dart';
 import 'package:student_job_applying/src/models/user.dart';
+import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 
@@ -18,7 +19,9 @@ class RecruitmentPostItem extends StatelessWidget {
       splashColor: AppColors.noColor,
       highlightColor: AppColors.noColor,
       onTap: () {
-        //TODO:  move to Recruitment Post detail page
+        //move to Recruitment Post detail page
+        Navigator.pushNamed(context, RouteNames.recruitmentPostDetail,
+            arguments: recruitmentPost);
       },
       child: Container(
         padding: const EdgeInsets.all(8.0),
@@ -67,7 +70,7 @@ class RecruitmentPostItem extends StatelessWidget {
         children: <TextSpan>[
           TextSpan(
             text: recruitmentPost.salaryType == SalaryType.fixed
-                ? '${recruitmentPost.salaryFrom}đ - ${recruitmentPost.salaryTo}đ'
+                ? '${recruitmentPost.minSalary()} - ${recruitmentPost.maxSalary()}'
                 : '',
             style: Theme.of(context).textTheme.bodyText2,
           ),

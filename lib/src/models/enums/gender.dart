@@ -30,7 +30,7 @@ extension GenderEX on Gender {
       case Gender.male:
         return AppStrings.male;
       default:
-        return '';
+        return AppStrings.maleOrFemale;
     }
   }
 }

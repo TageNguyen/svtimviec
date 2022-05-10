@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 
@@ -172,4 +173,14 @@ Future<T?> showCupertinoBottomPicker<T>(
           ),
         );
       }).then((value) => value);
+}
+
+void showToastMessage(String message) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.TOP,
+    backgroundColor: AppColors.black.withOpacity(0.8),
+    textColor: Colors.white,
+  );
 }

@@ -47,4 +47,21 @@ class AppStrings {
   static const from = 'Từ';
   static const pleaseContactUsAt = 'Vui lòng liên hệ chúng tôi tại';
   static const orByEmailAddress = 'hoặc bằng địa chỉ email';
+  static const hire = 'tuyển dụng';
+  static const apply = 'Ứng tuyển';
+  static const maleOrFemale = 'Nam hoặc nữ';
+  static const emptyList = 'Danh sách trống';
+  static const submitApplicationSuccessfully = 'Gửi đơn ứng tuyển thành công';
+  static const savePostSuccessfully = 'Lưu bài viết thành công';
+  static const unSavePostSuccessfully = 'Bỏ lưu bài viết thành công';
+  static const areYouSureThatYouWantToApplyForThisPost =
+      'Bạn có chắc là muốn ứng tuyển vào tin này không';
+  static const youWillNotBeAbleToUndoYourApplication =
+      'Bạn không thể hoàn tác việc ứng tuyển';
+  static const comment = 'Bình luận';
+  static const areYouSureThatYouWantToPostCommentForThisPost =
+      'Bạn có chắc là muốn bình luận tin này không';
+  static const youWillNotBeAbleToUndoYourCommentation =
+      'Bạn sẽ không thể hoàn tác bình luận của mình';
+  static const postCommentSuccessfully = 'Gửi bình luận thành công';
 }

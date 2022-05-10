@@ -16,19 +16,19 @@ abstract class RecruitmentApi extends BaseApi {
   });
 
   /// get recruitment post detail from [id]
-  Future<RecruitmentPost> getRecruitmentPostDetail(String id);
+  Future<RecruitmentPost> getRecruitmentPostDetail(int id);
 
   /// apply for recruitment post
-  Future<bool> applyForRecruitmentPost(String id);
+  Future<bool> applyForRecruitmentPost(int id);
 
   /// report recruitment post
-  Future<bool> reportRecruitmentPost(String id, String reason);
+  Future<bool> reportRecruitmentPost(int id, String reason);
 
   /// save recruitment post
-  Future<bool> saveRecruitmentPosts(String id);
+  Future<bool> saveRecruitmentPost(int id);
 
   /// remove recruitment post from saved list
-  Future<bool> unSaveRecruitmentPosts(String id);
+  Future<bool> unSaveRecruitmentPost(int id);
 
   /// get saved recruitment post list
   Future<List<RecruitmentPost>> getSavedRecruitmentPosts({int page = 1});

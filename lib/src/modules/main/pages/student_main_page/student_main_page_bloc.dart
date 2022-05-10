@@ -1,4 +1,5 @@
 import 'package:rxdart/rxdart.dart';
+import 'package:student_job_applying/src/constants.dart';
 import 'package:student_job_applying/src/models/enums/gender.dart';
 import 'package:student_job_applying/src/models/enums/salary_type.dart';
 import 'package:student_job_applying/src/models/recruitment_post.dart';
@@ -10,8 +11,8 @@ class StudentMainPageBloC extends BloC {
 
   StudentMainPageBloC(this.recruitmentApi);
 
-  final _recruitmentPostsObject = BehaviorSubject<List<RecruitmentPost>>();
-  Stream<List<RecruitmentPost>> get recruitmentPosts =>
+  final _recruitmentPostsObject = BehaviorSubject<List<RecruitmentPost>?>();
+  Stream<List<RecruitmentPost>?> get recruitmentPosts =>
       _recruitmentPostsObject.stream;
 
   int _currentPage = 1;
@@ -39,6 +40,7 @@ class StudentMainPageBloC extends BloC {
     if (isRefresh) {
       _currentPage = 1;
       _currentList.clear();
+      _recruitmentPostsObject.add(null);
     } else {
       _currentPage++;
     }
@@ -52,8 +54,8 @@ class StudentMainPageBloC extends BloC {
       salaryTo: _salaryTo,
       salaryType: _salaryType,
     );
-    _canLoadMore = recruitmentPosts
-        .isNotEmpty; // can not loadmore if api return empty list
+    _canLoadMore = recruitmentPosts.length <
+        kDefaultPageSize; // can not loadmore if api return a list has less element than page size
     _currentList.addAll(recruitmentPosts);
     _recruitmentPostsObject.add(_currentList);
   }

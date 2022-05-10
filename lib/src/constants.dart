@@ -8,3 +8,6 @@ const double kDefaultFontSize = 16.0;
 
 // default size for icon
 const double kDefaultIconSize = 20.0;
+
+// default page size, used for paging request
+const int kDefaultPageSize = 10;

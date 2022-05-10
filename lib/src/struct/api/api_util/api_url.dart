@@ -15,7 +15,7 @@ class ApiUrl {
   // recruitment post
   static const getRecruitmentPosts = '/recruitment-news';
   static const getRecruitmentPostDetail = '/recruitment-news/detail';
-  static const applyForRecruitmentPost = 'recruitment-news/apply';
+  static const applyForRecruitmentPost = '/recruitment-news/apply';
   static const reportRecruitmentPost = '/recruitment-news/report';
   static const saveRecruitmentPosts = '/recruitment-news/add-favorite';
   static const getSavedRecruitmentPosts = '/recruitment-news/favorite-news';

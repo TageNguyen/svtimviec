@@ -24,7 +24,7 @@ dependencies:
   #UX
   keyboard_dismisser: ^2.0.1
   pull_to_refresh: ^2.0.0
-
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:

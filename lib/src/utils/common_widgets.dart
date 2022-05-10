@@ -10,6 +10,13 @@ const loadingWidget = Center(
   child: CircularProgressIndicator(),
 );
 
+const emptyMessage = Center(
+  child: Text(
+    AppStrings.emptyList,
+    style: AppTextStyles.defaultRegular,
+  ),
+);
+
 Widget errorScreen({String? message}) {
   return Center(
     child: Padding(
@@ -68,7 +75,7 @@ Widget buildFileCircleAvatar(File? file, {double size = 32.0}) {
 Widget buildNetworkImage(String url) {
   return FadeInImage(
     image: NetworkImage(url),
-    placeholder: const AssetImage(ImagePaths.avatarPlaceholder),
+    placeholder: const AssetImage(ImagePaths.companyPlaceholderImage),
     imageErrorBuilder: (context, error, stackTrace) {
       return Image.asset(ImagePaths.companyPlaceholderImage,
           fit: BoxFit.contain);

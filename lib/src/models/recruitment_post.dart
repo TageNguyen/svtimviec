@@ -1,16 +1,17 @@
 import 'package:intl/intl.dart';
 import 'package:student_job_applying/src/models/enums/gender.dart';
 import 'package:student_job_applying/src/models/enums/salary_type.dart';
+import 'package:student_job_applying/src/models/post_report.dart';
 import 'package:student_job_applying/src/models/user.dart';
 
 class RecruitmentPost {
-  int? id;
+  late int id;
   String? jobName;
   String? jobDescription;
   int? status;
   SalaryType? salaryType;
-  String? salaryFrom;
-  String? salaryTo;
+  double? salaryFrom;
+  double? salaryTo;
   int? minAge;
   Gender? gender;
   int? recruiterId;
@@ -19,23 +20,31 @@ class RecruitmentPost {
   DateTime? createdAt;
   String? updatedAt;
   User? recruiter;
+  List<PostReport> reports = [];
+  int savedCount = 0;
+  bool isSaved = false; // whether user has saved this post or not
+  bool isApplied = false; // whether user has applied for this post or not
+  bool isReported = false; // whether user has reported this post or not
 
-  RecruitmentPost(
-      {this.id,
-      this.jobName,
-      this.jobDescription,
-      this.status,
-      this.salaryType,
-      this.salaryFrom,
-      this.salaryTo,
-      this.minAge,
-      this.gender,
-      this.recruiterId,
-      this.adminId,
-      this.jobCategoryId,
-      this.createdAt,
-      this.updatedAt,
-      this.recruiter});
+  RecruitmentPost({
+    required this.id,
+    this.jobName,
+    this.jobDescription,
+    this.status,
+    this.salaryType,
+    this.salaryFrom,
+    this.salaryTo,
+    this.minAge,
+    this.gender,
+    this.recruiterId,
+    this.adminId,
+    this.jobCategoryId,
+    this.createdAt,
+    this.updatedAt,
+    this.recruiter,
+    required this.reports,
+    required this.savedCount,
+  });
 
   RecruitmentPost.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -43,8 +52,8 @@ class RecruitmentPost {
     jobDescription = json['job_description'];
     status = json['status'];
     salaryType = SalaryTypeEX.fromIndex(json['salary_type']);
-    salaryFrom = json['salary_from'];
-    salaryTo = json['salary_to'];
+    salaryFrom = double.tryParse(json['salary_from'] ?? '0');
+    salaryTo = double.tryParse(json['salary_to'] ?? '0');
     minAge = json['min_age'];
     gender = GenderEX.fromIndex(json['sex']);
     recruiterId = json['recruiter_id'];
@@ -53,7 +62,33 @@ class RecruitmentPost {
     createdAt =
         DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(json['created_at']);
     updatedAt = json['updated_at'];
-    recruiter =
-        json['recruiter'] != null ? User.fromJson(json['recruiter']) : null;
+    if (json['recruiter'] != null) {
+      recruiter = User.fromJson(json['recruiter']);
+    }
+    if (json['report_news'] != null) {
+      reports = json['report_news']
+          .map<PostReport>((e) => PostReport.fromJson(e))
+          .toList();
+    }
+    if (json['favorite_news'] != null) {
+      savedCount = json['favorite_news'].length;
+    }
+    if (json['is_favorite'] != null) {
+      isSaved = json['is_favorite'] == 1;
+    }
+    if (json['is_applied'] != null) {
+      isApplied = json['is_applied'] == 1;
+    }
+    if (json['is_reported'] != null) {
+      isReported = json['is_reported'] == 1;
+    }
+  }
+
+  String minSalary() {
+    return NumberFormat.currency(locale: 'vi', symbol: 'đ').format(salaryFrom);
+  }
+
+  String maxSalary() {
+    return NumberFormat.currency(locale: 'vi', symbol: 'đ').format(salaryTo);
   }
 }

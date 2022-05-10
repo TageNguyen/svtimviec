@@ -1,3 +1,4 @@
+import 'package:student_job_applying/src/constants.dart';
 import 'package:student_job_applying/src/models/recruitment_post.dart';
 import 'package:student_job_applying/src/models/enums/salary_type.dart';
 import 'package:student_job_applying/src/models/enums/gender.dart';
@@ -25,6 +26,7 @@ class RecruitmentServices extends RecruitmentApi {
         ApiParameter.minAge: '${minAge ?? ''}',
         ApiParameter.sex: '${gender?.rawData ?? 2}',
         ApiParameter.search: keyword,
+        ApiParameter.perPage: '$kDefaultPageSize',
       },
     ).then((res) => res['data']
         .map<RecruitmentPost>((e) => RecruitmentPost.fromJson(e))
@@ -32,13 +34,15 @@ class RecruitmentServices extends RecruitmentApi {
   }
 
   @override
-  Future<bool> applyForRecruitmentPost(String id) {
-    return postMethod('${ApiUrl.applyForRecruitmentPost}/$id')
-        .then((res) => res['data']);
+  Future<bool> applyForRecruitmentPost(int id) {
+    return postMethod(
+      ApiUrl.applyForRecruitmentPost,
+      body: {ApiParameter.id: '$id'},
+    ).then((res) => true);
   }
 
   @override
-  Future<RecruitmentPost> getRecruitmentPostDetail(String id) {
+  Future<RecruitmentPost> getRecruitmentPostDetail(int id) {
     return getMethod('${ApiUrl.getRecruitmentPostDetail}/$id')
         .then((res) => RecruitmentPost.fromJson(res['data']));
   }
@@ -56,7 +60,7 @@ class RecruitmentServices extends RecruitmentApi {
   }
 
   @override
-  Future<bool> reportRecruitmentPost(String id, String reason) {
+  Future<bool> reportRecruitmentPost(int id, String reason) {
     return postMethod(
       '${ApiUrl.reportRecruitmentPost}/$id',
       body: {ApiParameter.reason: reason},
@@ -64,14 +68,14 @@ class RecruitmentServices extends RecruitmentApi {
   }
 
   @override
-  Future<bool> saveRecruitmentPosts(String id) {
+  Future<bool> saveRecruitmentPost(int id) {
     return postMethod(
       '${ApiUrl.saveRecruitmentPosts}/$id',
     ).then((res) => true);
   }
 
   @override
-  Future<bool> unSaveRecruitmentPosts(String id) {
+  Future<bool> unSaveRecruitmentPost(int id) {
     return deleteMethod('${ApiUrl.unSaveRecruitmentPosts}/$id')
         .then((value) => true);
   }

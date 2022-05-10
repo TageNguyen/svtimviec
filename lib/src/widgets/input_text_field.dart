@@ -17,6 +17,8 @@ class InputTextField extends StatelessWidget {
   final bool obscureText;
   final bool autofocus;
   final Color? fillColor;
+  final TextStyle? hintStyle;
+  final int? maxLines;
 
   const InputTextField(
       {Key? key,
@@ -34,7 +36,9 @@ class InputTextField extends StatelessWidget {
       this.onTap,
       this.textInputAction = TextInputAction.next,
       this.autofocus = false,
-      this.fillColor})
+      this.fillColor,
+      this.hintStyle,
+      this.maxLines = 1})
       : super(key: key);
 
   @override
@@ -51,8 +55,11 @@ class InputTextField extends StatelessWidget {
       maxLength: maxLength,
       readOnly: readOnly,
       obscureText: obscureText,
+      maxLines: maxLines,
+      minLines: 1,
       decoration: InputDecoration(
         labelText: hintText,
+        labelStyle: hintStyle,
         counterText: '',
         suffixIcon: suffixIcon,
         fillColor: fillColor,

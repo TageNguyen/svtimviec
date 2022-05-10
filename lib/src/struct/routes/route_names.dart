@@ -5,4 +5,5 @@ class RouteNames {
   static const register = '/register';
   static const verifyEmail = '/verify_email';
   static const updateRequiredInformations = '/update_required_informations';
+  static const recruitmentPostDetail = '/recruitment_post_detail';
 }

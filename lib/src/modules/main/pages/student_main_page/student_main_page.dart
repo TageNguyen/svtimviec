@@ -20,7 +20,7 @@ class StudentMainPage extends StatelessWidget {
           dispose: (context, bloC) => bloC.dispose(),
         )
       ],
-      child: StudentMainScreen(),
+      child: const StudentMainScreen(),
     );
   }
 }
