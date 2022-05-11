@@ -24,4 +24,9 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     fontSize: kDefaultFontSize,
   );
+  static const defaultMedium = TextStyle(
+    color: AppColors.black,
+    fontWeight: FontWeight.w500,
+    fontSize: kDefaultFontSize,
+  );
 }

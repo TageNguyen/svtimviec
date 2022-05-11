@@ -64,4 +64,8 @@ class AppStrings {
   static const youWillNotBeAbleToUndoYourCommentation =
       'Bạn sẽ không thể hoàn tác bình luận của mình';
   static const postCommentSuccessfully = 'Gửi bình luận thành công';
+  static const companyInformations = 'Thông tin công ty';
+  static const address = 'Địa chỉ';
+  static const website = 'Website';
+  static const couldNotLaunchLink = 'Không thể khởi chạy liên kết';
 }

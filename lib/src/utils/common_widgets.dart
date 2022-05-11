@@ -72,13 +72,13 @@ Widget buildFileCircleAvatar(File? file, {double size = 32.0}) {
   );
 }
 
-Widget buildNetworkImage(String url) {
+Widget buildNetworkImage(String url, {bool coverPlaceholder = false}) {
   return FadeInImage(
     image: NetworkImage(url),
     placeholder: const AssetImage(ImagePaths.companyPlaceholderImage),
     imageErrorBuilder: (context, error, stackTrace) {
       return Image.asset(ImagePaths.companyPlaceholderImage,
-          fit: BoxFit.contain);
+          fit: coverPlaceholder ? BoxFit.cover : BoxFit.contain);
     },
     fit: BoxFit.cover,
   );
