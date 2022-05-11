@@ -68,4 +68,6 @@ class AppStrings {
   static const address = 'Địa chỉ';
   static const website = 'Website';
   static const couldNotLaunchLink = 'Không thể khởi chạy liên kết';
+  static const savedRecruitmentPosts = 'Tin đã lưu';
+  static const userProfile = 'Thông tin người dùng';
 }

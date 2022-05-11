@@ -3,12 +3,23 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:student_job_applying/src/constants.dart';
+import 'package:student_job_applying/src/managers/user_manager.dart';
 import 'package:student_job_applying/src/models/recruitment_post.dart';
+import 'package:student_job_applying/src/models/user.dart';
 import 'package:student_job_applying/src/modules/main/pages/student_main_page/student_main_page_bloc.dart';
 import 'package:student_job_applying/src/modules/main/widgets/recruitment_post_item.dart';
 import 'package:student_job_applying/src/modules/main/widgets/search_bar.dart';
+import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
+
+// nhà tuyển dụng
+// TODO: Chỉnh sửa thông tin cá nhân + đổi mật khẩu
+// TODO: Tạo tin tuyển dụng (high)
+// TODO: Chỉnh sửa tin tuyển dụng (high)
+// TODO: danh sách ứng viên (high)
+// TODO: Lịch sử bài đăng + xóa bài đăng (high)
+// TODO: Chi tiết bài đăng (high)
 
 class StudentMainScreen extends StatefulWidget {
   const StudentMainScreen({Key? key}) : super(key: key);
@@ -72,6 +83,8 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
       alignment: Alignment.topCenter,
       child: Image.asset(
         ImagePaths.homeBackGround,
+        height: 200,
+        fit: BoxFit.fitHeight,
         color: AppColors.black,
       ),
     );
@@ -86,6 +99,27 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
       pinned: true,
       floating: true,
       elevation: 0,
+      actions: [
+        // Tin đã lưu
+        IconButton(
+          onPressed: () {
+            Navigator.pushNamed(context, RouteNames.savedPosts);
+          },
+          icon: const Icon(
+            Icons.bookmark,
+            color: AppColors.white,
+          ),
+          tooltip: AppStrings.savedRecruitmentPosts,
+        ),
+        // Thông tin người dùng
+        IconButton(
+          onPressed: () {
+            // TODO: đi đến trang user infor (Chỉnh sửa thông tin cá nhân + đổi mật khẩu)
+          },
+          icon: _buildUserAvatar(context),
+          tooltip: AppStrings.userProfile,
+        ),
+      ],
       bottom: const PreferredSize(
         child: SearchBar(),
         preferredSize: Size.fromHeight(60.0),
@@ -119,6 +153,16 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
             ),
           ),
         );
+      },
+    );
+  }
+
+  Widget _buildUserAvatar(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: context.read<UserManager>().currentUser,
+      builder: (context, snapshot) {
+        User? user = snapshot.data;
+        return buildNetworkCircleAvatar(user?.avatar ?? '');
       },
     );
   }
