@@ -25,4 +25,8 @@ class ApiParameter {
   static const reason = 'reason';
   static const perPage = 'per_page';
   static const id = 'id';
+  static const avatar = 'avatar';
+  static const oldPassword = 'old_password';
+  static const newPassword = 'new_password';
+  static const confirmNewPassword = 'confirm_new_password';
 }

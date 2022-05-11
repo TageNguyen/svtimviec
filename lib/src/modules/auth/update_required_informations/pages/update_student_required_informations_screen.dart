@@ -168,7 +168,7 @@ class _UpdateStudentRequiredInformationsScreenState
   void pickGender() {
     showCupertinoBottomPicker<Gender>(
       context,
-      listData: Gender.values,
+      listData: Gender.values.sublist(0, 2),
       item: (gender) => Text(gender.name),
       initialItem: bloC.studentRequestModel.gender,
     ).then((gender) {

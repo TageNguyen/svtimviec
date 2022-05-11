@@ -11,6 +11,10 @@ class ApiUrl {
 
   // user
   static const updateRequiredInformations = '/user/update-requirement-infos';
+  static const getRecruiterInformations = '/user/recruiter';
+  static const getStudentInformations = '/user/student';
+  static const updatePassword = '/user/update-password';
+  static const updateUserInformations = '/user/update-info';
 
   // recruitment post
   static const getRecruitmentPosts = '/recruitment-news';

@@ -8,6 +8,7 @@ import 'package:student_job_applying/src/models/recruitment_post.dart';
 import 'package:student_job_applying/src/models/user.dart';
 import 'package:student_job_applying/src/modules/main/pages/student_main_page/recruitment_post_detail/recruitment_post_detail_bloc.dart';
 import 'package:student_job_applying/src/modules/main/pages/student_main_page/recruitment_post_detail/widgets/recruitment_post_comment.dart';
+import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/app_style/app_text_styles.dart';
 import 'package:student_job_applying/src/utils/helpers.dart';
@@ -60,7 +61,11 @@ class RecruitmentPostDetailScreen extends StatelessWidget {
                       const SizedBox(height: 4.0),
                       _buildRequiredInformations(context, post),
                       const SizedBox(height: 12.0),
-                      _buildRecruiterInformations(context, post.recruiter),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: _buildRecruiterInformations(
+                            context, post.recruiter),
+                      ),
                       const SizedBox(height: 4.0),
                       _buildContactAddress(context, post),
                       const SizedBox(height: 16.0),
@@ -91,30 +96,37 @@ class RecruitmentPostDetailScreen extends StatelessWidget {
   }
 
   Widget _buildRecruiterInformations(BuildContext context, User? recruiter) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        buildNetworkCircleAvatar(
-          recruiter?.avatar ?? '',
-          size: 50.0,
-        ),
-        const SizedBox(width: 5.0),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${recruiter?.name}',
-                style: AppTextStyles.defaultSemibold,
-              ),
-              Text(
-                '${recruiter?.email}',
-                style: AppTextStyles.greyRegular.copyWith(fontSize: 14),
-              ),
-            ],
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, RouteNames.recruiterProfile,
+            arguments: recruiter?.recruiterId);
+      },
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          buildNetworkCircleAvatar(
+            recruiter?.avatar ?? '',
+            size: 50.0,
           ),
-        ),
-      ],
+          const SizedBox(width: 5.0),
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${recruiter?.name}',
+                  style: AppTextStyles.defaultSemibold,
+                ),
+                Text(
+                  '${recruiter?.email}',
+                  style: AppTextStyles.greyRegular.copyWith(fontSize: 14),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 

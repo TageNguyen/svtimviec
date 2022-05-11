@@ -11,12 +11,14 @@ abstract class RequiredInformationsRequestModel {
 
 class StudentRequiredInformationsRequestModel
     extends RequiredInformationsRequestModel {
-  Gender? gender;
   int? age;
-  Province? province;
   String phone = '';
   String district = '';
   String ward = '';
+  String name = '';
+  File? avatar;
+  Gender? gender;
+  Province? province;
 
   @override
   Map<String, dynamic> toJson() {
@@ -28,6 +30,8 @@ class StudentRequiredInformationsRequestModel
       ApiParameter.provinceId: province?.id ?? '',
       ApiParameter.district: district,
       ApiParameter.ward: ward,
+      ApiParameter.avatar: avatar,
+      ApiParameter.name: name,
     };
   }
 
@@ -46,10 +50,12 @@ class RecruiterRequiredInformationsRequestModel
     extends RequiredInformationsRequestModel {
   String phone = '';
   String companyName = '';
-  File? companyImage;
-  Province? province;
+  String name = '';
   String district = '';
   String ward = '';
+  File? companyImage;
+  File? avatar;
+  Province? province;
 
   @override
   Map<String, dynamic> toJson() {
@@ -61,6 +67,8 @@ class RecruiterRequiredInformationsRequestModel
       ApiParameter.province: province?.name ?? '',
       ApiParameter.district: district,
       ApiParameter.ward: ward,
+      ApiParameter.avatar: avatar,
+      ApiParameter.name: name,
     };
   }
 

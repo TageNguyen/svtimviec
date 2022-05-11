@@ -80,35 +80,41 @@ class RecruitmentPostItem extends StatelessWidget {
   }
 
   Widget _buildRecruiterInformations(BuildContext context, User? recruiter) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        buildNetworkCircleAvatar(
-          recruiter?.avatar ?? '',
-          size: 40.0,
-        ),
-        const SizedBox(width: 5.0),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${recruiter?.companyName}',
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Text(
-                '${recruiter?.name}',
-                style: AppTextStyles.greyRegular.copyWith(fontSize: 12),
-              ),
-            ],
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, RouteNames.recruiterProfile,
+            arguments: recruiter?.recruiterId);
+      },
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildNetworkCircleAvatar(
+            recruiter?.avatar ?? '',
+            size: 40.0,
           ),
-        ),
-        const SizedBox(width: 4.0),
-        Text(
-          '${recruitmentPost.createdAt?.ddmmyyyy}',
-          style: AppTextStyles.greyRegular.copyWith(fontSize: 14),
-        ),
-      ],
+          const SizedBox(width: 5.0),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${recruiter?.companyName}',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Text(
+                  '${recruiter?.name}',
+                  style: AppTextStyles.greyRegular.copyWith(fontSize: 12),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 4.0),
+          Text(
+            '${recruitmentPost.createdAt?.ddmmyyyy}',
+            style: AppTextStyles.greyRegular.copyWith(fontSize: 14),
+          ),
+        ],
+      ),
     );
   }
 
