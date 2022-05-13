@@ -246,6 +246,6 @@ class _UpdateStudentRequiredInformationsScreenState
     userManager.broadcastUser(userData);
     Navigator.of(context).pop(); // hide loading
     // move to main page
-    Navigator.pushReplacementNamed(context, RouteNames.main);
+    Navigator.pushReplacementNamed(context, RouteNames.root);
   }
 }
