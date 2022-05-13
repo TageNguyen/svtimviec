@@ -4,13 +4,12 @@ import 'package:student_job_applying/src/models/enums/gender.dart';
 import 'package:student_job_applying/src/models/enums/salary_type.dart';
 import 'package:student_job_applying/src/models/recruitment_post.dart';
 import 'package:student_job_applying/src/models/user.dart';
-import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 
-class RecruitmentPostItem extends StatelessWidget {
+class PostHistoryItem extends StatelessWidget {
   final RecruitmentPost recruitmentPost;
-  const RecruitmentPostItem({Key? key, required this.recruitmentPost})
+  const PostHistoryItem({Key? key, required this.recruitmentPost})
       : super(key: key);
 
   @override
@@ -20,8 +19,6 @@ class RecruitmentPostItem extends StatelessWidget {
       highlightColor: AppColors.noColor,
       onTap: () {
         //move to Recruitment Post detail page
-        Navigator.pushNamed(context, RouteNames.recruitmentPostDetail,
-            arguments: recruitmentPost);
       },
       child: Container(
         padding: const EdgeInsets.all(8.0),
@@ -53,9 +50,6 @@ class RecruitmentPostItem extends StatelessWidget {
             _buildSalaryInformations(context),
             const SizedBox(height: 4.0),
             _buildRequiredInformations(context),
-            const SizedBox(height: 4.0),
-            _buildContactAddress(context),
-            _buildCompanyImage(context),
           ],
         ),
       ),
@@ -80,41 +74,35 @@ class RecruitmentPostItem extends StatelessWidget {
   }
 
   Widget _buildRecruiterInformations(BuildContext context, User? recruiter) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, RouteNames.recruiterProfile,
-            arguments: recruiter?.recruiterId);
-      },
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildNetworkCircleAvatar(
-            recruiter?.avatar ?? '',
-            size: 40.0,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        buildNetworkCircleAvatar(
+          recruiter?.avatar ?? '',
+          size: 40.0,
+        ),
+        const SizedBox(width: 5.0),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${recruiter?.companyName}',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Text(
+                '${recruiter?.name}',
+                style: AppTextStyles.greyRegular.copyWith(fontSize: 12),
+              ),
+            ],
           ),
-          const SizedBox(width: 5.0),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${recruiter?.companyName}',
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-                Text(
-                  '${recruiter?.name}',
-                  style: AppTextStyles.greyRegular.copyWith(fontSize: 12),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 4.0),
-          Text(
-            '${recruitmentPost.createdAt?.ddmmyyyy}',
-            style: AppTextStyles.greyRegular.copyWith(fontSize: 14),
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(width: 4.0),
+        Text(
+          '${recruitmentPost.createdAt?.ddmmyyyy}',
+          style: AppTextStyles.greyRegular.copyWith(fontSize: 14),
+        ),
+      ],
     );
   }
 
@@ -135,21 +123,6 @@ class RecruitmentPostItem extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyText2,
         ),
       ],
-    );
-  }
-
-  Widget _buildContactAddress(BuildContext context) {
-    return Text(
-      '${AppStrings.pleaseContactUsAt}: ${recruitmentPost.recruiter?.companyAddress} ${AppStrings.orByEmailAddress}: ${recruitmentPost.recruiter?.email}',
-      style: AppTextStyles.greyRegular
-          .copyWith(fontStyle: FontStyle.italic, fontSize: 14.0),
-    );
-  }
-
-  Widget _buildCompanyImage(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 3,
-      child: buildNetworkImage(recruitmentPost.recruiter?.companyImage ?? ''),
     );
   }
 }

@@ -24,4 +24,13 @@ class ApiUrl {
   static const saveRecruitmentPosts = '/recruitment-news/add-favorite';
   static const getSavedRecruitmentPosts = '/recruitment-news/favorite-news';
   static const unSaveRecruitmentPosts = '/recruitment-news/delete-favorite';
+
+  // recruiter api
+  static const getPostsHistory = '/recruitment-news/history-news';
+  static const getRecruitmentDetail = '/recruitment-news/detail-news';
+  static const getListCandidates = '/recruitment-news/list-apply';
+  static const getListJobCategories = '/get-all-category';
+  static const createNewRecruitmentPost = '/recruitment-news/create';
+  static const updateRecruitmentPost = '/recruitment-news/edit';
+  static const deleteRecruitmentPost = '/recruitment-news/delete-news';
 }

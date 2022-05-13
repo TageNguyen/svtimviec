@@ -54,7 +54,7 @@ class StudentMainPageBloC extends BloC {
       salaryTo: _salaryTo,
       salaryType: _salaryType,
     );
-    _canLoadMore = recruitmentPosts.length <
+    _canLoadMore = recruitmentPosts.length ==
         kDefaultPageSize; // can not loadmore if api return a list has less element than page size
     _currentList.addAll(recruitmentPosts);
     _recruitmentPostsObject.add(_currentList);

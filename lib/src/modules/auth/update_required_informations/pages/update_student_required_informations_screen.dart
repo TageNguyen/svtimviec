@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:student_job_applying/src/managers/user_manager.dart';
 import 'package:student_job_applying/src/models/enums/gender.dart';
 import 'package:student_job_applying/src/models/province.dart';
-import 'package:student_job_applying/src/models/user.dart';
 import 'package:student_job_applying/src/modules/auth/update_required_informations/update_required_informations_bloc.dart';
 import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
@@ -237,15 +236,16 @@ class _UpdateStudentRequiredInformationsScreenState
     showLoading(context, message: AppStrings.updating);
     await bloC.updateRequiredInformations();
     Navigator.pop(context); // hide loading
-    await getUserInformations();
-  }
-
-  Future<void> getUserInformations() async {
-    showLoading(context, message: AppStrings.loadingUserInformations);
-    User userData = await bloC.getCurrentUserInformations();
-    userManager.broadcastUser(userData);
-    Navigator.of(context).pop(); // hide loading
-    // move to main page
+    // await getUserInformations();
     Navigator.pushReplacementNamed(context, RouteNames.root);
   }
+
+  // Future<void> getUserInformations() async {
+  //   showLoading(context, message: AppStrings.loadingUserInformations);
+  //   User userData = await bloC.getCurrentUserInformations();
+  //   userManager.broadcastUser(userData);
+  //   Navigator.of(context).pop(); // hide loading
+  //   // move to main page
+  //   Navigator.pushReplacementNamed(context, RouteNames.root);
+  // }
 }

@@ -15,6 +15,7 @@ void main() {
   runApp(MultiProvider(
     providers: [
       Provider<ThemeDataProvider>(create: (_) => ThemeDataProvider()),
+      Provider<UserManager>(create: (_) => UserManager()),
     ],
     child: const MyApp(),
   ));
@@ -33,11 +34,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           onGenerateRoute: (RouteSettings settings) => settings.generateRoute,
           theme: snapshot.data ?? AppTheme.lightTheme,
-          home: MultiProvider(providers: [
-            Provider<UserManager>(
-              create: (_) => UserManager(),
-            ),
-          ], child: const AppRoot()),
+          home: const AppRoot(),
         );
       },
     );

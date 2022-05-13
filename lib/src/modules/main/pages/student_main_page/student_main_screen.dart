@@ -13,14 +13,6 @@ import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 
-// nhà tuyển dụng
-// TODO: Chỉnh sửa thông tin cá nhân + đổi mật khẩu
-// TODO: Tạo tin tuyển dụng (high)
-// TODO: Chỉnh sửa tin tuyển dụng (high)
-// TODO: danh sách ứng viên (high)
-// TODO: Lịch sử bài đăng + xóa bài đăng (high)
-// TODO: Chi tiết bài đăng (high)
-
 class StudentMainScreen extends StatefulWidget {
   const StudentMainScreen({Key? key}) : super(key: key);
 
@@ -114,7 +106,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
         // Thông tin người dùng
         IconButton(
           onPressed: () {
-            // TODO: đi đến trang user infor (Chỉnh sửa thông tin cá nhân + đổi mật khẩu)
+            Navigator.pushNamed(context, RouteNames.profile);
           },
           icon: _buildUserAvatar(context),
           tooltip: AppStrings.userProfile,
