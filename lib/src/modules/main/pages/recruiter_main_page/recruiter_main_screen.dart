@@ -101,7 +101,7 @@ class _RecruiterMainScreenState extends State<RecruiterMainScreen> {
           );
         }
         return SliverPadding(
-          padding: const EdgeInsets.symmetric(vertical: 12.0),
+          padding: const EdgeInsets.only(top: 12.0, bottom: 50.0),
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext _, int index) {

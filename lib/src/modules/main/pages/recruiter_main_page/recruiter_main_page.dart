@@ -6,7 +6,6 @@ import 'package:student_job_applying/src/modules/main/pages/recruiter_main_page/
 
 // nhà tuyển dụng
 // TODO: Chỉnh sửa thông tin cá nhân + đổi mật khẩu
-// TODO: danh sách ứng viên (high)
 
 class RecruiterMainPage extends StatelessWidget {
   const RecruiterMainPage({Key? key}) : super(key: key);

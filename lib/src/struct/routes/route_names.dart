@@ -11,4 +11,5 @@ class RouteNames {
   static const profile = '/profile';
   static const postDetail = '/post_detail';
   static const createNewPost = '/create_new_post';
+  static const listCandidates = '/list_candidates';
 }

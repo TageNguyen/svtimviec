@@ -27,7 +27,7 @@ extension TypeRoleEX on TypeRole {
     }
   }
 
-  static TypeRole fromIndex(int index) {
+  static TypeRole fromIndex(int? index) {
     switch (index) {
       case 1:
         return TypeRole.admin;

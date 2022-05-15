@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:student_job_applying/src/extensions/date_time_ex.dart';
@@ -62,7 +63,12 @@ class PostHistoryItem extends StatelessWidget {
             const SizedBox(height: 4.0),
             _buildSalaryInformations(context),
             const SizedBox(height: 4.0),
-            _buildRequiredInformations(context),
+            Row(
+              children: [
+                Expanded(child: _buildRequiredInformations(context)),
+                _buildAppliedCandidatesButton(context),
+              ],
+            ),
           ],
         ),
       ),
@@ -136,6 +142,24 @@ class PostHistoryItem extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyText2,
         ),
       ],
+    );
+  }
+
+  Widget _buildAppliedCandidatesButton(BuildContext context) {
+    return IconButton(
+      icon: Badge(
+        badgeContent: Text(
+          '${recruitmentPost.applicationCount}',
+          style: AppTextStyles.whiteRegular.copyWith(fontSize: 12.0),
+        ),
+        showBadge: recruitmentPost.applicationCount > 0,
+        child: const Icon(Icons.list_alt_rounded),
+      ),
+      tooltip: AppStrings.listCandidates,
+      onPressed: () {
+        Navigator.pushNamed(context, RouteNames.listCandidates,
+            arguments: recruitmentPost);
+      },
     );
   }
 }

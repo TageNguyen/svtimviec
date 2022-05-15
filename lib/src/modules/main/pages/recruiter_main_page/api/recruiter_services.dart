@@ -8,7 +8,7 @@ import 'package:student_job_applying/src/struct/api/api_util/api_url.dart';
 
 class RecruiterServices extends RecruiterApi {
   @override
-  Future<User> getListCandidates(int postId) {
+  Future<List<User>> getListCandidates(int postId) {
     return getMethod('${ApiUrl.getListCandidates}/$postId')
         .then((res) => res['data'].map<User>((e) => User.fromJson(e)).toList());
   }

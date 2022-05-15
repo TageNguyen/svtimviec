@@ -24,6 +24,7 @@ class RecruitmentPost {
   User? recruiter;
   List<PostReport>? reports;
   int? savedCount;
+  int applicationCount = 0;
   JobCategory? jobCategory;
   bool isSaved = false; // whether user has saved this post or not
   bool isApplied = false; // whether user has applied for this post or not
@@ -48,6 +49,7 @@ class RecruitmentPost {
     this.reports,
     this.savedCount = 0,
     this.jobCategory,
+    this.applicationCount = 0,
   });
 
   RecruitmentPost.fromJson(Map<String, dynamic> json) {
@@ -66,6 +68,7 @@ class RecruitmentPost {
     createdAt =
         DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(json['created_at']);
     updatedAt = json['updated_at'];
+    applicationCount = json['students_apply_count'] ?? 0;
     if (json['recruiter'] != null) {
       recruiter = User.fromJson(json['recruiter']);
     }

@@ -13,7 +13,7 @@ abstract class RecruiterApi extends BaseApi {
   Future<RecruitmentPost> getRecruitmentDetail(int postId);
 
   /// get list candidates apply for recruitment post via [postId]
-  Future<User> getListCandidates(int postId);
+  Future<List<User>> getListCandidates(int postId);
 
   /// get list categories
   Future<List<JobCategory>> getListJobCategories();

@@ -95,4 +95,5 @@ class AppStrings {
       'Bạn có chắc là muốn xóa tin này không';
   static const deleting = 'Đang xóa';
   static const deletePostSuccessfully = 'Xóa tin thành công';
+  static const listCandidates = 'Danh sách ứng viên';
 }
