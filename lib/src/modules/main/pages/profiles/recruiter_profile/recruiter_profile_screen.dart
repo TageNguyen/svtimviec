@@ -54,7 +54,6 @@ class RecruiterProfileScreen extends StatelessWidget {
       children: [
         _buildCompanyAndRecruiterImage(
             context, recruiter.companyImage ?? '', recruiter.avatar ?? ''),
-        const SizedBox(height: 8.0),
         _buildRecruiterInformations(context, recruiter),
         _buildCompanyInformations(context, recruiter),
       ],
@@ -80,46 +79,38 @@ class RecruiterProfileScreen extends StatelessWidget {
   }
 
   Widget _buildRecruiterInformations(BuildContext context, User recruiter) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          recruiter.name ?? '',
-          style: AppTextStyles.defaultSemibold.copyWith(fontSize: 20),
-        ),
-        Text(
-          recruiter.email ?? '',
-          style: AppTextStyles.defaultRegular,
-        ),
-        Text(
-          recruiter.phone ?? '',
-          style: AppTextStyles.defaultRegular,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              recruiter.name ?? '',
+              style: AppTextStyles.defaultSemibold.copyWith(fontSize: 20),
+            ),
+          ),
+          const SizedBox(height: 24.0),
+          _buildInformations(AppStrings.email, recruiter.email ?? ''),
+          const SizedBox(height: 12.0),
+          _buildInformations(AppStrings.phoneNumber, recruiter.phone ?? ''),
+        ],
+      ),
     );
   }
 
   Widget _buildCompanyInformations(BuildContext context, User recruiter) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            AppStrings.companyInformations,
-            style: AppTextStyles.defaultMedium,
-          ),
-          const SizedBox(height: 8.0),
-          Text(
-            '${AppStrings.companyName}: ${recruiter.companyName}',
-            style: AppTextStyles.defaultRegular,
-          ),
-          const SizedBox(height: 4.0),
-          Text(
-            '${AppStrings.address}: ${recruiter.address ?? ''}',
-            style: AppTextStyles.defaultRegular,
-          ),
-          const SizedBox(height: 4.0),
+          _buildInformations(
+              AppStrings.companyName, recruiter.companyName ?? ''),
+          const SizedBox(height: 12.0),
+          _buildInformations(
+              AppStrings.address, recruiter.companyAddress ?? ''),
+          const SizedBox(height: 12.0),
           _buildCompanyWebsite(context, recruiter.website ?? ''),
         ],
       ),
@@ -140,6 +131,34 @@ class RecruiterProfileScreen extends StatelessWidget {
             onTap: () => launchLink(website),
             style: const TextStyle(fontSize: 16, color: AppColors.primaryBlue),
             toolbarOptions: const ToolbarOptions(copy: true, selectAll: true),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildInformations(String title, String infor) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          '$title: ',
+          style: AppTextStyles.defaultMedium,
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 4.0),
+          padding: const EdgeInsets.all(12.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4.0),
+            border: Border.all(
+              color: AppColors.black1A,
+              width: 0.5,
+            ),
+            color: AppColors.black1A.withOpacity(0.1),
+          ),
+          child: Text(
+            infor,
+            style: AppTextStyles.defaultMedium,
           ),
         ),
       ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_job_applying/src/models/user.dart';
+import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 
@@ -12,7 +13,10 @@ class CandidateItem extends StatelessWidget {
     return InkWell(
       splashColor: AppColors.noColor,
       highlightColor: AppColors.noColor,
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, RouteNames.studentProfile,
+            arguments: candidate.studentId);
+      },
       child: Container(
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
