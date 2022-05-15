@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:student_job_applying/src/extensions/date_time_ex.dart';
 import 'package:student_job_applying/src/models/enums/gender.dart';
 import 'package:student_job_applying/src/models/enums/salary_type.dart';
 import 'package:student_job_applying/src/models/recruitment_post.dart';
+import 'package:student_job_applying/src/models/screen_arguments/post_detail_arguments.dart';
 import 'package:student_job_applying/src/models/user.dart';
+import 'package:student_job_applying/src/modules/main/pages/recruiter_main_page/recruiter_main_page_bloc.dart';
+import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 
@@ -18,7 +22,16 @@ class PostHistoryItem extends StatelessWidget {
       splashColor: AppColors.noColor,
       highlightColor: AppColors.noColor,
       onTap: () {
-        //move to Recruitment Post detail page
+        var bloC = context.read<RecruiterMainPageBloC>();
+        Navigator.pushNamed(
+          context,
+          RouteNames.postDetail,
+          arguments: PostDetailArguments(
+            post: recruitmentPost,
+            onDelete: () => bloC.deletePost(recruitmentPost.id),
+            onUpdated: (post) => bloC.updatePost(post),
+          ),
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(8.0),

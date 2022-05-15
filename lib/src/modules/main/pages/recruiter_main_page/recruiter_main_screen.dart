@@ -102,7 +102,7 @@ class _RecruiterMainScreenState extends State<RecruiterMainScreen> {
           padding: const EdgeInsets.symmetric(vertical: 12.0),
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
+              (BuildContext _, int index) {
                 return PostHistoryItem(recruitmentPost: posts[index]);
               },
               childCount: posts.length,

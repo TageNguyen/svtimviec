@@ -70,4 +70,9 @@ class AppStrings {
   static const couldNotLaunchLink = 'Không thể khởi chạy liên kết';
   static const savedRecruitmentPosts = 'Tin đã lưu';
   static const userProfile = 'Thông tin người dùng';
+  static const recruitment = 'Tuyển dụng';
+  static const edit = 'Sửa';
+  static const save = 'Lưu';
+  static const delete = 'Xóa';
+  static const loading = 'Đang tải dữ liệu';
 }

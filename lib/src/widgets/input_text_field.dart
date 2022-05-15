@@ -19,6 +19,7 @@ class InputTextField extends StatelessWidget {
   final Color? fillColor;
   final TextStyle? hintStyle;
   final int? maxLines;
+  final bool? enabled;
 
   const InputTextField(
       {Key? key,
@@ -38,7 +39,8 @@ class InputTextField extends StatelessWidget {
       this.autofocus = false,
       this.fillColor,
       this.hintStyle,
-      this.maxLines = 1})
+      this.maxLines = 1,
+      this.enabled = true})
       : super(key: key);
 
   @override
@@ -57,13 +59,13 @@ class InputTextField extends StatelessWidget {
       obscureText: obscureText,
       maxLines: maxLines,
       minLines: 1,
+      enabled: enabled,
       decoration: InputDecoration(
-        labelText: hintText,
-        labelStyle: hintStyle,
+        hintText: hintText,
+        hintStyle: hintStyle,
         counterText: '',
         suffixIcon: suffixIcon,
         fillColor: fillColor,
-        floatingLabelBehavior: FloatingLabelBehavior.never,
       ),
       onTap: onTap,
       onChanged: onChanged,

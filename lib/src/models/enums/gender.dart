@@ -7,8 +7,10 @@ extension GenderEX on Gender {
     switch (this) {
       case Gender.female:
         return 0;
-      default:
+      case Gender.male:
         return 1;
+      default:
+        return 2;
     }
   }
 

@@ -29,4 +29,10 @@ class ApiParameter {
   static const oldPassword = 'old_password';
   static const newPassword = 'new_password';
   static const confirmNewPassword = 'confirm_new_password';
+  static const jobName = 'job_name';
+  static const jobDescription = 'job_description';
+  static const isNewCategory = 'is_new_category';
+  static const jobCategoryId = 'job_category_id';
+  static const jobCategoryName = 'job_category_name';
+  static const jobCategoryDescription = 'job_category_description';
 }

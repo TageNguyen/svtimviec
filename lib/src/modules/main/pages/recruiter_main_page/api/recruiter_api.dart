@@ -22,7 +22,7 @@ abstract class RecruiterApi extends BaseApi {
   Future<void> createNewRecruitmentPost();
 
   /// update recruitment post
-  Future<void> updateRecruitmentPost();
+  Future<void> updateRecruitmentPost(RecruitmentPost post);
 
   /// delete recruitment post via [postId]
   Future<void> deleteRecruitmentPost(int postId);

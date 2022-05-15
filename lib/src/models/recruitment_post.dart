@@ -1,8 +1,10 @@
 import 'package:intl/intl.dart';
 import 'package:student_job_applying/src/models/enums/gender.dart';
 import 'package:student_job_applying/src/models/enums/salary_type.dart';
+import 'package:student_job_applying/src/models/job_category.dart';
 import 'package:student_job_applying/src/models/post_report.dart';
 import 'package:student_job_applying/src/models/user.dart';
+import 'package:student_job_applying/src/struct/api/api_util/api_parameter.dart';
 
 class RecruitmentPost {
   late int id;
@@ -22,6 +24,7 @@ class RecruitmentPost {
   User? recruiter;
   List<PostReport> reports = [];
   int savedCount = 0;
+  JobCategory? jobCategory;
   bool isSaved = false; // whether user has saved this post or not
   bool isApplied = false; // whether user has applied for this post or not
   bool isReported = false; // whether user has reported this post or not
@@ -44,6 +47,7 @@ class RecruitmentPost {
     this.recruiter,
     required this.reports,
     required this.savedCount,
+    required this.jobCategory,
   });
 
   RecruitmentPost.fromJson(Map<String, dynamic> json) {
@@ -82,6 +86,9 @@ class RecruitmentPost {
     if (json['is_reported'] != null) {
       isReported = json['is_reported'] == 1;
     }
+    if (json['job_category'] != null) {
+      jobCategory = JobCategory.fromJson(json['job_category']);
+    }
   }
 
   String minSalary() {
@@ -90,5 +97,21 @@ class RecruitmentPost {
 
   String maxSalary() {
     return NumberFormat.currency(locale: 'vi', symbol: 'đ').format(salaryTo);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      ApiParameter.jobName: jobName ?? '',
+      ApiParameter.jobDescription: jobDescription ?? '',
+      ApiParameter.isNewCategory: jobCategory?.id != null ? 0 : 1,
+      ApiParameter.jobCategoryId: '${jobCategory?.id ?? ''}',
+      ApiParameter.jobCategoryName: jobCategory?.name ?? '',
+      ApiParameter.jobCategoryDescription: jobCategory?.description ?? '',
+      ApiParameter.salaryType: salaryType?.rawData ?? '',
+      ApiParameter.salaryFrom: '${salaryFrom ?? ''}',
+      ApiParameter.salaryTo: '${salaryTo ?? ''}',
+      ApiParameter.minAge: '${minAge ?? ''}',
+      ApiParameter.sex: gender?.rawData ?? '',
+    };
   }
 }

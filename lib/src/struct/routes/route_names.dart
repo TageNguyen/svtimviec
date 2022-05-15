@@ -9,4 +9,5 @@ class RouteNames {
   static const recruiterProfile = '/recruiter_profile';
   static const savedPosts = '/saved_posts';
   static const profile = '/profile';
+  static const postDetail = '/post_detail';
 }

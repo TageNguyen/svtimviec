@@ -32,7 +32,7 @@ class RecruiterServices extends RecruiterApi {
 
   @override
   Future<RecruitmentPost> getRecruitmentDetail(int postId) {
-    return getMethod('${ApiUrl.getRecruitmentPostDetail}/$postId')
+    return getMethod('${ApiUrl.getRecruitmentDetail}/$postId')
         .then((res) => RecruitmentPost.fromJson(res['data']));
   }
 
@@ -43,9 +43,11 @@ class RecruiterServices extends RecruiterApi {
   }
 
   @override
-  Future<void> updateRecruitmentPost() {
-    // TODO: implement updateRecruitmentPost
-    throw UnimplementedError();
+  Future<void> updateRecruitmentPost(RecruitmentPost post) {
+    return putMethod(
+      '${ApiUrl.updateRecruitmentPost}/${post.id}}',
+      body: post.toJson(),
+    );
   }
 
   @override

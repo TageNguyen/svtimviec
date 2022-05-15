@@ -5,9 +5,9 @@ import 'package:student_job_applying/src/modules/main/pages/recruiter_main_page/
 import 'package:student_job_applying/src/struct/base_bloc.dart';
 
 class RecruiterMainPageBloC extends BloC {
-  final RecruiterApi recruitmentApi;
+  final RecruiterApi recruiterApi;
 
-  RecruiterMainPageBloC(this.recruitmentApi);
+  RecruiterMainPageBloC(this.recruiterApi);
 
   final _recruitmentPostsObject = BehaviorSubject<List<RecruitmentPost>?>();
   Stream<List<RecruitmentPost>?> get recruitmentPosts =>
@@ -29,10 +29,26 @@ class RecruiterMainPageBloC extends BloC {
       _currentPage++;
     }
     List<RecruitmentPost> recruitmentPosts =
-        await recruitmentApi.getPostsHistory(_currentPage);
+        await recruiterApi.getPostsHistory(_currentPage);
     _canLoadMore = recruitmentPosts.length ==
         kDefaultPageSize; // can not loadmore if api return a list has less element than page size
     _currentList.addAll(recruitmentPosts);
+    _recruitmentPostsObject.add(_currentList);
+  }
+
+  /// delete post has [postId]
+  void deletePost(int postId) {
+    _currentList.removeWhere((element) => element.id == postId);
+    _recruitmentPostsObject.add(_currentList);
+  }
+
+  /// update post data in list
+  void updatePost(RecruitmentPost post) {
+    int position = _currentList.indexWhere((element) => element.id == post.id);
+    if (position == -1) {
+      return;
+    }
+    _currentList[position] = post;
     _recruitmentPostsObject.add(_currentList);
   }
 
