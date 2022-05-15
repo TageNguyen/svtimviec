@@ -32,7 +32,7 @@ class RecruitmentPostDetailBloC extends BloC {
   /// get recruitment post detail
   Future<void> getRecruitmentDetail() async {
     RecruitmentPost post =
-        await recruitmentApi.getRecruitmentPostDetail(recruitmentPost.id);
+        await recruitmentApi.getRecruitmentPostDetail(recruitmentPost.id!);
     _recruitmentObject.add(post);
     _applyButtonObject.add(post.isApplied);
     _saveButtonObject.add(post.isSaved);
@@ -40,22 +40,22 @@ class RecruitmentPostDetailBloC extends BloC {
   }
 
   Future<void> applyForRecruitmentPost() async {
-    await recruitmentApi.applyForRecruitmentPost(recruitmentPost.id);
+    await recruitmentApi.applyForRecruitmentPost(recruitmentPost.id!);
     _applyButtonObject.add(true);
   }
 
   Future<void> saveRecruitmentPost() async {
-    await recruitmentApi.saveRecruitmentPost(recruitmentPost.id);
+    await recruitmentApi.saveRecruitmentPost(recruitmentPost.id!);
     _saveButtonObject.add(true);
   }
 
   Future<void> unSaveRecruitmentPost() async {
-    await recruitmentApi.unSaveRecruitmentPost(recruitmentPost.id);
+    await recruitmentApi.unSaveRecruitmentPost(recruitmentPost.id!);
     _saveButtonObject.add(false);
   }
 
   Future<void> commentPost() async {
-    await recruitmentApi.reportRecruitmentPost(recruitmentPost.id, _comment);
+    await recruitmentApi.reportRecruitmentPost(recruitmentPost.id!, _comment);
     _comment = '';
     _commentFieldObject.add(false);
     getRecruitmentDetail();

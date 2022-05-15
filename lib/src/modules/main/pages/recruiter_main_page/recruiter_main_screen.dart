@@ -6,6 +6,7 @@ import 'package:student_job_applying/src/extensions/exception_ex.dart';
 import 'package:student_job_applying/src/models/recruitment_post.dart';
 import 'package:student_job_applying/src/modules/main/pages/recruiter_main_page/recruiter_main_page_bloc.dart';
 import 'package:student_job_applying/src/modules/main/widgets/post_history_item.dart';
+import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 
@@ -44,6 +45,7 @@ class _RecruiterMainScreenState extends State<RecruiterMainScreen> {
           _buildScrollableBody(context),
         ],
       ),
+      floatingActionButton: _createPostButton(context),
     );
   }
 
@@ -168,5 +170,15 @@ class _RecruiterMainScreenState extends State<RecruiterMainScreen> {
   void _onRefresh(BuildContext context) async {
     context.read<RecruiterMainPageBloC>().getPostsHistory();
     _refreshController.refreshCompleted();
+  }
+
+  FloatingActionButton _createPostButton(BuildContext context) {
+    return FloatingActionButton(
+      backgroundColor: AppColors.darkBlue,
+      child: const Icon(Icons.add),
+      onPressed: () {
+        Navigator.pushNamed(context, RouteNames.createNewPost);
+      },
+    );
   }
 }

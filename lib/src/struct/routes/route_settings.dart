@@ -8,6 +8,7 @@ import 'package:student_job_applying/src/modules/auth/update_required_informatio
 import 'package:student_job_applying/src/modules/auth/verify_email/verify_email_page.dart';
 import 'package:student_job_applying/src/modules/main/main.dart';
 import 'package:student_job_applying/src/modules/main/pages/profiles/recruiter_profile/recruiter_profile_page.dart';
+import 'package:student_job_applying/src/modules/main/pages/recruiter_main_page/create_new_post/create_new_post_page.dart';
 import 'package:student_job_applying/src/modules/main/pages/recruiter_main_page/post_detail/post_detail_page.dart';
 import 'package:student_job_applying/src/modules/main/pages/student_main_page/recruitment_post_detail/recruitment_post_detail_page.dart';
 import 'package:student_job_applying/src/modules/main/pages/student_main_page/saved_posts/saved_posts_page.dart';
@@ -49,6 +50,9 @@ extension GenerateRoute on RouteSettings {
         return MaterialPageRoute(
             builder: (context) =>
                 PostDetailPage(arguments: arguments as PostDetailArguments));
+      case RouteNames.createNewPost:
+        return MaterialPageRoute(
+            builder: (context) => const CreateNewPostPage());
       default:
         return MaterialPageRoute(
           builder: (context) => Scaffold(

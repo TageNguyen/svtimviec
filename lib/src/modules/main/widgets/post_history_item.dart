@@ -28,7 +28,7 @@ class PostHistoryItem extends StatelessWidget {
           RouteNames.postDetail,
           arguments: PostDetailArguments(
             post: recruitmentPost,
-            onDelete: () => bloC.deletePost(recruitmentPost.id),
+            onDelete: () => bloC.deletePost(recruitmentPost.id!),
             onUpdated: (post) => bloC.updatePost(post),
           ),
         );
@@ -52,12 +52,12 @@ class PostHistoryItem extends StatelessWidget {
           children: [
             _buildRecruiterInformations(context, recruitmentPost.recruiter),
             Text(
-              '${recruitmentPost.jobName}',
+              recruitmentPost.jobName,
               style: Theme.of(context).textTheme.bodyText1,
             ),
             const SizedBox(height: 4.0),
             Text(
-              '${recruitmentPost.jobDescription}',
+              recruitmentPost.jobDescription,
             ),
             const SizedBox(height: 4.0),
             _buildSalaryInformations(context),
@@ -72,7 +72,7 @@ class PostHistoryItem extends StatelessWidget {
   Widget _buildSalaryInformations(BuildContext context) {
     return RichText(
       text: TextSpan(
-        text: '${recruitmentPost.salaryType?.name}: ',
+        text: '${recruitmentPost.salaryType.name}: ',
         style: Theme.of(context).textTheme.bodyText1,
         children: <TextSpan>[
           TextSpan(

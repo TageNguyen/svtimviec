@@ -19,7 +19,7 @@ abstract class RecruiterApi extends BaseApi {
   Future<List<JobCategory>> getListJobCategories();
 
   /// create new recruitment post
-  Future<void> createNewRecruitmentPost();
+  Future<void> createNewRecruitmentPost(RecruitmentPost post);
 
   /// update recruitment post
   Future<void> updateRecruitmentPost(RecruitmentPost post);

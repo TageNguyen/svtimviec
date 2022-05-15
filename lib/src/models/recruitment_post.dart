@@ -7,14 +7,14 @@ import 'package:student_job_applying/src/models/user.dart';
 import 'package:student_job_applying/src/struct/api/api_util/api_parameter.dart';
 
 class RecruitmentPost {
-  late int id;
-  String? jobName;
-  String? jobDescription;
+  int? id;
+  String jobName = '';
+  String jobDescription = '';
   int? status;
-  SalaryType? salaryType;
-  double? salaryFrom;
-  double? salaryTo;
-  int? minAge;
+  SalaryType salaryType = SalaryType.fixed;
+  double salaryFrom = 0;
+  double salaryTo = 0;
+  int minAge = 0;
   Gender? gender;
   int? recruiterId;
   int? adminId;
@@ -22,22 +22,22 @@ class RecruitmentPost {
   DateTime? createdAt;
   String? updatedAt;
   User? recruiter;
-  List<PostReport> reports = [];
-  int savedCount = 0;
+  List<PostReport>? reports;
+  int? savedCount;
   JobCategory? jobCategory;
   bool isSaved = false; // whether user has saved this post or not
   bool isApplied = false; // whether user has applied for this post or not
   bool isReported = false; // whether user has reported this post or not
 
   RecruitmentPost({
-    required this.id,
-    this.jobName,
-    this.jobDescription,
+    this.id,
+    this.jobName = '',
+    this.jobDescription = '',
     this.status,
-    this.salaryType,
-    this.salaryFrom,
-    this.salaryTo,
-    this.minAge,
+    this.salaryType = SalaryType.fixed,
+    this.salaryFrom = 0,
+    this.salaryTo = 0,
+    this.minAge = 0,
     this.gender,
     this.recruiterId,
     this.adminId,
@@ -45,9 +45,9 @@ class RecruitmentPost {
     this.createdAt,
     this.updatedAt,
     this.recruiter,
-    required this.reports,
-    required this.savedCount,
-    required this.jobCategory,
+    this.reports,
+    this.savedCount = 0,
+    this.jobCategory,
   });
 
   RecruitmentPost.fromJson(Map<String, dynamic> json) {
@@ -56,9 +56,9 @@ class RecruitmentPost {
     jobDescription = json['job_description'];
     status = json['status'];
     salaryType = SalaryTypeEX.fromIndex(json['salary_type']);
-    salaryFrom = double.tryParse(json['salary_from'] ?? '0');
-    salaryTo = double.tryParse(json['salary_to'] ?? '0');
-    minAge = json['min_age'];
+    salaryFrom = double.tryParse(json['salary_from'] ?? '0') ?? 0;
+    salaryTo = double.tryParse(json['salary_to'] ?? '0') ?? 0;
+    minAge = json['min_age'] ?? 0;
     gender = GenderEX.fromIndex(json['sex']);
     recruiterId = json['recruiter_id'];
     adminId = json['admin_id'];
@@ -101,17 +101,21 @@ class RecruitmentPost {
 
   Map<String, dynamic> toJson() {
     return {
-      ApiParameter.jobName: jobName ?? '',
-      ApiParameter.jobDescription: jobDescription ?? '',
+      ApiParameter.jobName: jobName,
+      ApiParameter.jobDescription: jobDescription,
       ApiParameter.isNewCategory: jobCategory?.id != null ? 0 : 1,
       ApiParameter.jobCategoryId: '${jobCategory?.id ?? ''}',
       ApiParameter.jobCategoryName: jobCategory?.name ?? '',
       ApiParameter.jobCategoryDescription: jobCategory?.description ?? '',
-      ApiParameter.salaryType: salaryType?.rawData ?? '',
-      ApiParameter.salaryFrom: '${salaryFrom ?? ''}',
-      ApiParameter.salaryTo: '${salaryTo ?? ''}',
-      ApiParameter.minAge: '${minAge ?? ''}',
+      ApiParameter.salaryType: salaryType.rawData,
+      ApiParameter.salaryFrom: '$salaryFrom',
+      ApiParameter.salaryTo: '$salaryTo ',
+      ApiParameter.minAge: '$minAge ',
       ApiParameter.sex: gender?.rawData ?? '',
     };
+  }
+
+  bool isEnoughRequireInformations() {
+    return jobName.isNotEmpty && jobDescription.isNotEmpty;
   }
 }

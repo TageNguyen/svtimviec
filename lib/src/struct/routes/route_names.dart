@@ -10,4 +10,5 @@ class RouteNames {
   static const savedPosts = '/saved_posts';
   static const profile = '/profile';
   static const postDetail = '/post_detail';
+  static const createNewPost = '/create_new_post';
 }

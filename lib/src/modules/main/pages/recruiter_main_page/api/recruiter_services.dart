@@ -37,9 +37,11 @@ class RecruiterServices extends RecruiterApi {
   }
 
   @override
-  Future<void> createNewRecruitmentPost() {
-    // TODO: implement createNewRecruitmentPost
-    throw UnimplementedError();
+  Future<void> createNewRecruitmentPost(RecruitmentPost post) {
+    return postMethod(
+      ApiUrl.createNewRecruitmentPost,
+      body: post.toJson(),
+    );
   }
 
   @override

@@ -75,4 +75,24 @@ class AppStrings {
   static const save = 'Lưu';
   static const delete = 'Xóa';
   static const loading = 'Đang tải dữ liệu';
+  static const jobInformations = 'Thông tin việc làm';
+  static const jobName = 'Tên công việc';
+  static const jonDescription = 'Mô tả công việc';
+  static const jobCategoryName = 'Tên Danh mục';
+  static const jobCategoryDescription = 'Mô tả Danh mục';
+  static const salaryInformations = 'Thông tin lương';
+  static const salaryType = 'Loại lương';
+  static const minSalary = 'Lương thấp nhất';
+  static const maxSalary = 'Lương cao nhất';
+  static const createNewPost = 'Tạo tin mới';
+  static const postPost = 'Đăng tin';
+  static const createNewPostSuccessfulyPleaseWaitAdminForApproving =
+      'Đăng bài thành công, vui lòng đợi quản trị viên duyệt bài';
+  static const postingPost = 'Đang đăng tin';
+  static const deletePost = 'Xóa tin';
+  static const updateSuccessfully = 'Cập nhật thành công';
+  static const areYouSureToDeleteThisPost =
+      'Bạn có chắc là muốn xóa tin này không';
+  static const deleting = 'Đang xóa';
+  static const deletePostSuccessfully = 'Xóa tin thành công';
 }

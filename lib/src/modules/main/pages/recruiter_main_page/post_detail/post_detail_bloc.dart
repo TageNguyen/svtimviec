@@ -26,7 +26,7 @@ class PostDetailBloC extends BloC {
 
   /// get recruitment post detail
   Future<void> getRecruitmentDetail() async {
-    postDetail = await recruiterApi.getRecruitmentDetail(post.id);
+    postDetail = await recruiterApi.getRecruitmentDetail(post.id!);
     jobCategory = postDetail.jobCategory ?? JobCategory();
     _recruitmentObject.add(postDetail);
   }
@@ -44,7 +44,7 @@ class PostDetailBloC extends BloC {
 
   /// delete post
   Future<void> deletePost() async {
-    return recruiterApi.deleteRecruitmentPost(postDetail.id);
+    return recruiterApi.deleteRecruitmentPost(postDetail.id!);
   }
 
   @override

@@ -12,4 +12,7 @@ class JobCategory {
     description = json['description'] ?? '';
     ispublic = json['is_publised'] == 1;
   }
+  bool isEnoughInformations() {
+    return name.isNotEmpty && description.isNotEmpty;
+  }
 }

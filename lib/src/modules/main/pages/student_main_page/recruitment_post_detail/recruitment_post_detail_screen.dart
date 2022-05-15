@@ -49,12 +49,12 @@ class RecruitmentPostDetailScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8.0),
                       Text(
-                        '${post.jobName}',
+                        post.jobName,
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                       const SizedBox(height: 4.0),
                       Text(
-                        '${post.jobDescription}',
+                        post.jobDescription,
                       ),
                       const SizedBox(height: 4.0),
                       _buildSalaryInformations(context, post),
@@ -71,7 +71,7 @@ class RecruitmentPostDetailScreen extends StatelessWidget {
                       const SizedBox(height: 16.0),
                       _buildButtons(context),
                       const SizedBox(height: 16.0),
-                      RecruitmentPostComment(listReport: post.reports),
+                      RecruitmentPostComment(listReport: post.reports ?? []),
                     ],
                   ),
                 );
@@ -134,7 +134,7 @@ class RecruitmentPostDetailScreen extends StatelessWidget {
       BuildContext context, RecruitmentPost recruitmentPost) {
     return RichText(
       text: TextSpan(
-        text: '${recruitmentPost.salaryType?.name}: ',
+        text: '${recruitmentPost.salaryType.name}: ',
         style: Theme.of(context).textTheme.bodyText1,
         children: <TextSpan>[
           TextSpan(

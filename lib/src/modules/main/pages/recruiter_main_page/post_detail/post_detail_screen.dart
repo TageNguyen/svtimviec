@@ -80,10 +80,6 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     );
   }
 
-  /* 
-  thông tin chung: tên công việc, mô tả công việc, loại lương, lương thấp nhất, lương cao nhất
-  yêu cầu về công việc: tuổi thấp nhất, giới tính, danh mục
-  */
   Widget _buildScrollableView(BuildContext context, RecruitmentPost post) {
     return StreamBuilder<bool>(
       stream: bloC.editButtonState,
@@ -95,12 +91,12 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'Thông tin việc làm: ',
+                '${AppStrings.jobInformations}: ',
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               const SizedBox(height: 12),
               InputTextField(
-                hintText: 'Tên công việc',
+                hintText: AppStrings.jobName,
                 controller: _jobNameController,
                 readOnly: !canEdit,
                 textCapitalization: TextCapitalization.words,
@@ -108,7 +104,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
               ),
               const SizedBox(height: 12),
               InputTextField(
-                hintText: 'Mô tả công việc',
+                hintText: AppStrings.jonDescription,
                 controller: _jobDescriptionController,
                 readOnly: !canEdit,
                 maxLines: 5,
@@ -118,8 +114,9 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
               ),
               const SizedBox(height: 12),
               InputTextField(
-                hintText: 'Tên Danh mục',
+                hintText: AppStrings.jobCategoryName,
                 controller: _jobCategoryNameController,
+                textCapitalization: TextCapitalization.words,
                 readOnly: !canEdit,
                 enabled: canEdit,
                 suffixIcon: canEdit
@@ -140,8 +137,9 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
               ),
               const SizedBox(height: 12),
               InputTextField(
-                hintText: 'Mô tả Danh mục',
+                hintText: AppStrings.jobCategoryDescription,
                 controller: _jobCategoryDescriptionController,
+                textCapitalization: TextCapitalization.sentences,
                 readOnly: !canEdit,
                 enabled: canEdit,
                 onChanged: (value) {
@@ -153,12 +151,12 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
               ),
               const SizedBox(height: 12),
               Text(
-                'Thông tin lương: ',
+                '${AppStrings.salaryInformations}: ',
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               const SizedBox(height: 12),
               InputTextField(
-                hintText: 'Loại lương',
+                hintText: AppStrings.salaryType,
                 controller: _salaryTypeController,
                 readOnly: true,
                 onTap: pickSalaryType,
@@ -166,32 +164,33 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
               ),
               const SizedBox(height: 12),
               InputTextField(
-                hintText: 'Lương thấp nhất',
+                hintText: AppStrings.minSalary,
                 controller: _minSalaryController,
                 readOnly: !canEdit,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
-                  bloC.postDetail.salaryFrom = double.tryParse(value.trim());
+                  bloC.postDetail.salaryFrom =
+                      double.tryParse(value.trim()) ?? 0;
                 },
               ),
               const SizedBox(height: 12),
               InputTextField(
-                hintText: 'Lương cao nhất',
+                hintText: AppStrings.maxSalary,
                 controller: _maxSalaryController,
                 readOnly: !canEdit,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
-                  bloC.postDetail.salaryTo = double.tryParse(value.trim());
+                  bloC.postDetail.salaryTo = double.tryParse(value.trim()) ?? 0;
                 },
               ),
               const SizedBox(height: 12),
               Text(
-                'Yêu cầu: ',
+                '${AppStrings.requirement}: ',
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               const SizedBox(height: 12),
               InputTextField(
-                hintText: 'Giới tính',
+                hintText: AppStrings.gender,
                 controller: _genderController,
                 readOnly: true,
                 onTap: pickGender,
@@ -199,7 +198,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
               ),
               const SizedBox(height: 12),
               InputTextField(
-                hintText: 'Tuổi',
+                hintText: AppStrings.age,
                 controller: _ageController,
                 readOnly: true,
                 onTap: pickAge,
@@ -265,16 +264,12 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: const [
-          Icon(Icons.delete, color: AppColors.red),
-          SizedBox(width: 12),
+        children: [
+          const Icon(Icons.delete, color: AppColors.red),
+          const SizedBox(width: 12),
           Text(
-            'Xóa tin',
-            style: TextStyle(
-              color: AppColors.red,
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-            ),
+            AppStrings.deletePost,
+            style: AppTextStyles.whiteBold.copyWith(color: AppColors.red),
           ),
         ],
       ),
@@ -283,10 +278,10 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   }
 
   void updatePost() {
-    showLoading(context, message: 'Đang cập nhật');
+    showLoading(context, message: AppStrings.updating);
     bloC.updatePost().then((_) {
       Navigator.pop(context); // hide loading
-      showToastMessage('Cập nhật thành công');
+      showToastMessage(AppStrings.updateSuccessfully);
       widget.onUpdated(bloC.postDetail);
     }).catchError((error) {
       Navigator.pop(context); // hide loading
@@ -297,12 +292,12 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   void deletePost() {
     showConfirmDialog(context,
             actionText: AppStrings.delete,
-            message: 'Bạn có chắc là muốn xóa tin này không?')
+            message: '${AppStrings.areYouSureToDeleteThisPost}?')
         .then((confirm) {
       if (confirm) {
-        showLoading(context, message: 'Đang cập nhật');
+        showLoading(context, message: AppStrings.deleting);
         bloC.deletePost().then((_) {
-          showToastMessage('Xóa tin thành công');
+          showToastMessage(AppStrings.deletePostSuccessfully);
           widget.onDelete();
           Navigator.pop(context); // hide loading
           Navigator.pop(context); // hide detail screen
@@ -376,15 +371,15 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   }
 
   void _updateTextController(RecruitmentPost post) {
-    _jobNameController.text = post.jobName ?? '';
-    _jobDescriptionController.text = post.jobDescription ?? '';
+    _jobNameController.text = post.jobName;
+    _jobDescriptionController.text = post.jobDescription;
     _jobCategoryNameController.text = post.jobCategory?.name ?? '';
     _jobCategoryDescriptionController.text =
         post.jobCategory?.description ?? '';
-    _salaryTypeController.text = post.salaryType?.name ?? '';
-    _minSalaryController.text = post.salaryFrom?.toStringAsFixed(0) ?? '';
-    _maxSalaryController.text = post.salaryTo?.toStringAsFixed(0) ?? '';
+    _salaryTypeController.text = post.salaryType.name;
+    _minSalaryController.text = post.salaryFrom.toStringAsFixed(0);
+    _maxSalaryController.text = post.salaryTo.toStringAsFixed(0);
     _genderController.text = post.gender?.name ?? '';
-    _ageController.text = post.minAge?.toString() ?? '';
+    _ageController.text = post.minAge.toString();
   }
 }
