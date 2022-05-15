@@ -134,6 +134,8 @@ class _MyStudentProfilePageState extends State<MyStudentProfilePage> {
                 controller: _addressController,
                 readOnly: true,
               ),
+              const SizedBox(height: 12.0),
+              _buildChangePasswordButton(context),
               const SizedBox(height: 24.0),
               _buildUpdateButton(context),
               const SizedBox(height: 24.0),
@@ -185,6 +187,15 @@ class _MyStudentProfilePageState extends State<MyStudentProfilePage> {
         ],
       ),
       onPressed: logout,
+    );
+  }
+
+  Widget _buildChangePasswordButton(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        Navigator.pushNamed(context, RouteNames.changePassword);
+      },
+      child: const Text(AppStrings.changePassword),
     );
   }
 

@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:student_job_applying/src/extensions/date_time_ex.dart';
+import 'package:student_job_applying/src/managers/user_manager.dart';
 import 'package:student_job_applying/src/models/enums/gender.dart';
 import 'package:student_job_applying/src/models/enums/salary_type.dart';
 import 'package:student_job_applying/src/models/recruitment_post.dart';
@@ -96,10 +97,7 @@ class PostHistoryItem extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        buildNetworkCircleAvatar(
-          recruiter?.avatar ?? '',
-          size: 40.0,
-        ),
+        _buildRecruiterAvatar(context),
         const SizedBox(width: 5.0),
         Expanded(
           child: Column(
@@ -159,6 +157,18 @@ class PostHistoryItem extends StatelessWidget {
       onPressed: () {
         Navigator.pushNamed(context, RouteNames.listCandidates,
             arguments: recruitmentPost);
+      },
+    );
+  }
+
+  Widget _buildRecruiterAvatar(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: context.read<UserManager>().currentUser,
+      builder: (_, snapshot) {
+        return buildNetworkCircleAvatar(
+          snapshot.data?.avatar ?? '',
+          size: 40.0,
+        );
       },
     );
   }

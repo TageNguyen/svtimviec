@@ -13,4 +13,5 @@ class RouteNames {
   static const studentProfile = '/student_profile';
   static const recruiterProfile = '/recruiter_profile';
   static const profile = '/profile';
+  static const changePassword = '/change_password';
 }

@@ -73,20 +73,17 @@ class BaseApi {
       request.headers.addAll(headers);
       request.fields.addAll(_body);
       if (fileMap.isNotEmpty) {
-        fileMap.forEach((key, value) async {
+        for (String key in fileMap.keys) {
           request.files.add(
             await http.MultipartFile.fromPath(
               key,
-              value.path,
+              fileMap[key]!.path,
             ),
           );
-        });
+        }
       }
       var response = await request.send();
       String responseBody = await response.stream.bytesToString();
-
-      // http.Response response =
-      //     await http.post(uri, headers: headers, body: body);
       int statusCode = response.statusCode;
       _logResponse(url, statusCode, jsonDecode(responseBody));
       return _handleResponse(statusCode, jsonDecode(responseBody));

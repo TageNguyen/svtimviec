@@ -101,4 +101,10 @@ class AppStrings {
   static const updatingProfile = 'Đang cập nhật thông tin người dùng';
   static const areYouSureThatYouWantToLogout =
       'Bạn có chắc là muốn đăng xuất không';
+  static const changePassword = 'Đổi mật khẩu';
+  static const oldPassword = 'Mật khẩu cũ';
+  static const newPassword = 'Mật khẩu mới';
+  static const confirmNewPassword = 'Xác nhận mật khẩu mới';
+  static const changePasswordSuccessfullyPleaseLoginAgainToUseApp =
+      'Đổi mật khẩu thành công, vui lòng đăng nhập lại để sử dụng ứng dụng';
 }

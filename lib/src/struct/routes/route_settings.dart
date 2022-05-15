@@ -7,6 +7,7 @@ import 'package:student_job_applying/src/modules/auth/register/register_page.dar
 import 'package:student_job_applying/src/modules/auth/update_required_informations/update_required_informations_page.dart';
 import 'package:student_job_applying/src/modules/auth/verify_email/verify_email_page.dart';
 import 'package:student_job_applying/src/modules/main/main.dart';
+import 'package:student_job_applying/src/modules/main/pages/profiles/my_profile/change_password/change_password_page.dart';
 import 'package:student_job_applying/src/modules/main/pages/profiles/my_profile/my_profile_page.dart';
 import 'package:student_job_applying/src/modules/main/pages/profiles/recruiter_profile/recruiter_profile_page.dart';
 import 'package:student_job_applying/src/modules/main/pages/profiles/student_profile/student_profile_page.dart';
@@ -62,6 +63,9 @@ extension GenerateRoute on RouteSettings {
         return MaterialPageRoute(
             builder: (context) =>
                 ListCandidatesPage(post: arguments as RecruitmentPost));
+      case RouteNames.changePassword:
+        return MaterialPageRoute(
+            builder: (context) => const ChangePasswordPage());
       default:
         return MaterialPageRoute(
           builder: (context) => Scaffold(

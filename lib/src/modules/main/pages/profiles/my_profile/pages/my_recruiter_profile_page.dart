@@ -84,6 +84,8 @@ class _MyRecruiterProfilePageState extends State<MyRecruiterProfilePage> {
               _buildCompanyAndRecruiterImage(context, userData),
               const SizedBox(height: 24.0),
               _buildUserInformations(context, userData),
+              const SizedBox(height: 12.0),
+              _buildChangePasswordButton(context),
               const SizedBox(height: 24.0),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -200,6 +202,15 @@ class _MyRecruiterProfilePageState extends State<MyRecruiterProfilePage> {
         ],
       ),
       onPressed: logout,
+    );
+  }
+
+  Widget _buildChangePasswordButton(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        Navigator.pushNamed(context, RouteNames.changePassword);
+      },
+      child: const Text(AppStrings.changePassword),
     );
   }
 

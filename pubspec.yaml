@@ -28,6 +28,7 @@ dependencies:
   fluttertoast: ^8.0.9
   #UI
   badges: ^2.0.2
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   flutter_test:

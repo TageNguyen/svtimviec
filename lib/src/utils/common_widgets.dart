@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:student_job_applying/src/utils/app_style/app_style.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
@@ -37,12 +38,12 @@ Widget buildNetworkCircleAvatar(String url, {double size = 32.0}) {
     ),
     child: ClipRRect(
       borderRadius: BorderRadius.circular(100),
-      child: FadeInImage(
-        image: NetworkImage(url),
-        placeholder: const AssetImage(ImagePaths.avatarPlaceholder),
-        imageErrorBuilder: (context, error, stackTrace) {
-          return Image.asset(ImagePaths.avatarPlaceholder, fit: BoxFit.contain);
-        },
+      child: CachedNetworkImage(
+        imageUrl: url,
+        placeholder: (context, url) =>
+            Image.asset(ImagePaths.avatarPlaceholder),
+        errorWidget: (context, url, error) =>
+            Image.asset(ImagePaths.avatarPlaceholder, fit: BoxFit.contain),
         fit: BoxFit.cover,
       ),
     ),
@@ -73,17 +74,14 @@ Widget buildFileCircleAvatar(File? file, {double size = 32.0}) {
 }
 
 Widget buildNetworkImage(String url, {bool coverPlaceholder = false}) {
-  return FadeInImage(
-    image: NetworkImage(url),
-    placeholder: const AssetImage(ImagePaths.companyPlaceholderImage),
-    imageErrorBuilder: (context, error, stackTrace) {
-      return Image.asset(ImagePaths.companyPlaceholderImage,
-          fit: coverPlaceholder ? BoxFit.cover : BoxFit.contain);
-    },
-    placeholderErrorBuilder: (context, error, stackTrace) {
-      return Image.asset(ImagePaths.companyPlaceholderImage,
-          fit: coverPlaceholder ? BoxFit.cover : BoxFit.contain);
-    },
+  return CachedNetworkImage(
+    imageUrl: url,
+    placeholder: (context, url) => Image.asset(
+        ImagePaths.companyPlaceholderImage,
+        fit: coverPlaceholder ? BoxFit.cover : BoxFit.contain),
+    errorWidget: (context, url, error) => Image.asset(
+        ImagePaths.companyPlaceholderImage,
+        fit: coverPlaceholder ? BoxFit.cover : BoxFit.contain),
     fit: BoxFit.cover,
   );
 }
