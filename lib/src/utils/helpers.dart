@@ -23,10 +23,7 @@ Future<T?> showLoading<T extends Object?>(BuildContext context,
             children: [
               const CircularProgressIndicator(),
               const SizedBox(width: 4.0),
-              Container(
-                margin: const EdgeInsets.all(4.0),
-                child: Text(message ?? AppStrings.loading),
-              ),
+              Expanded(child: Text(message ?? AppStrings.loading)),
             ],
           ),
         ),

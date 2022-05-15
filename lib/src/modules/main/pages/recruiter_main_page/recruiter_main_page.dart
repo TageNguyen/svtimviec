@@ -4,9 +4,6 @@ import 'package:student_job_applying/src/modules/main/pages/recruiter_main_page/
 import 'package:student_job_applying/src/modules/main/pages/recruiter_main_page/recruiter_main_page_bloc.dart';
 import 'package:student_job_applying/src/modules/main/pages/recruiter_main_page/recruiter_main_screen.dart';
 
-// nhà tuyển dụng
-// TODO: Chỉnh sửa thông tin cá nhân + đổi mật khẩu
-
 class RecruiterMainPage extends StatelessWidget {
   const RecruiterMainPage({Key? key}) : super(key: key);
 

@@ -35,4 +35,5 @@ class ApiParameter {
   static const jobCategoryId = 'job_category_id';
   static const jobCategoryName = 'job_category_name';
   static const jobCategoryDescription = 'job_category_description';
+  static const website = 'website';
 }

@@ -7,6 +7,7 @@ import 'package:student_job_applying/src/modules/auth/register/register_page.dar
 import 'package:student_job_applying/src/modules/auth/update_required_informations/update_required_informations_page.dart';
 import 'package:student_job_applying/src/modules/auth/verify_email/verify_email_page.dart';
 import 'package:student_job_applying/src/modules/main/main.dart';
+import 'package:student_job_applying/src/modules/main/pages/profiles/my_profile/my_profile_page.dart';
 import 'package:student_job_applying/src/modules/main/pages/profiles/recruiter_profile/recruiter_profile_page.dart';
 import 'package:student_job_applying/src/modules/main/pages/profiles/student_profile/student_profile_page.dart';
 import 'package:student_job_applying/src/modules/main/pages/recruiter_main_page/create_new_post/create_new_post_page.dart';
@@ -14,7 +15,6 @@ import 'package:student_job_applying/src/modules/main/pages/recruiter_main_page/
 import 'package:student_job_applying/src/modules/main/pages/recruiter_main_page/post_detail/post_detail_page.dart';
 import 'package:student_job_applying/src/modules/main/pages/student_main_page/recruitment_post_detail/recruitment_post_detail_page.dart';
 import 'package:student_job_applying/src/modules/main/pages/student_main_page/saved_posts/saved_posts_page.dart';
-import 'package:student_job_applying/src/modules/main/pages/student_main_page/user_profile/user_profile_screen.dart';
 import 'package:student_job_applying/src/struct/routes/route_names.dart';
 import 'package:student_job_applying/src/utils/utils.dart';
 
@@ -50,8 +50,7 @@ extension GenerateRoute on RouteSettings {
       case RouteNames.savedPosts:
         return MaterialPageRoute(builder: (context) => const SavedPostsPage());
       case RouteNames.profile:
-        return MaterialPageRoute(
-            builder: (context) => const UserProfileScreen());
+        return MaterialPageRoute(builder: (context) => const MyProfilePage());
       case RouteNames.postDetail:
         return MaterialPageRoute(
             builder: (context) =>

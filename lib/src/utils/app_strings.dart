@@ -4,6 +4,7 @@ class AppStrings {
   static const email = 'Email';
   static const password = 'Mật khẩu';
   static const login = 'Đăng nhập';
+  static const logout = 'Đăng xuất';
   static const registerAccount = 'Đăng ký tài khoản';
   static const student = 'Sinh viên';
   static const recruiter = 'Nhà tuyển dụng';
@@ -97,4 +98,7 @@ class AppStrings {
   static const deletePostSuccessfully = 'Xóa tin thành công';
   static const listCandidates = 'Danh sách ứng viên';
   static const candidate = 'Ứng viên';
+  static const updatingProfile = 'Đang cập nhật thông tin người dùng';
+  static const areYouSureThatYouWantToLogout =
+      'Bạn có chắc là muốn đăng xuất không';
 }

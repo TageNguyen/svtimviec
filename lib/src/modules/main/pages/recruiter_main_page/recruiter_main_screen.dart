@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:student_job_applying/src/constants.dart';
 import 'package:student_job_applying/src/extensions/exception_ex.dart';
+import 'package:student_job_applying/src/managers/user_manager.dart';
 import 'package:student_job_applying/src/models/recruitment_post.dart';
+import 'package:student_job_applying/src/models/user.dart';
 import 'package:student_job_applying/src/modules/main/pages/recruiter_main_page/recruiter_main_page_bloc.dart';
 import 'package:student_job_applying/src/modules/main/widgets/post_history_item.dart';
 import 'package:student_job_applying/src/struct/routes/route_names.dart';
@@ -124,27 +126,26 @@ class _RecruiterMainScreenState extends State<RecruiterMainScreen> {
       pinned: true,
       floating: true,
       elevation: 0,
-      // actions: [
-      // Tin đã lưu
-      // IconButton(
-      //   onPressed: () {
-      //     // Navigator.pushNamed(context, RouteNames.savedPosts);
-      //   },
-      //   icon: const Icon(
-      //     Icons.bookmark,
-      //     color: AppColors.white,
-      //   ),
-      //   tooltip: AppStrings.savedRecruitmentPosts,
-      // ),
-      // // Thông tin người dùng
-      // IconButton(
-      //   onPressed: () {
-      //     Navigator.pushNamed(context, RouteNames.profile);
-      //   },
-      //   icon: _buildUserAvatar(context),
-      //   tooltip: AppStrings.userProfile,
-      // ),
-      // ],
+      actions: [
+        IconButton(
+          onPressed: () {
+            // move to profile page
+            Navigator.pushNamed(context, RouteNames.profile);
+          },
+          icon: _buildUserAvatar(context),
+          tooltip: AppStrings.userProfile,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildUserAvatar(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: context.read<UserManager>().currentUser,
+      builder: (context, snapshot) {
+        User? user = snapshot.data;
+        return buildNetworkCircleAvatar(user?.avatar ?? '');
+      },
     );
   }
 

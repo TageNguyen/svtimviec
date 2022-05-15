@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:student_job_applying/src/models/enums/gender.dart';
 import 'package:student_job_applying/src/models/province.dart';
+import 'package:student_job_applying/src/models/user.dart';
 import 'package:student_job_applying/src/struct/api/api_util/api_parameter.dart';
 
 abstract class RequiredInformationsRequestModel {
@@ -19,6 +20,16 @@ class StudentRequiredInformationsRequestModel
   File? avatar;
   Gender? gender;
   Province? province;
+
+  StudentRequiredInformationsRequestModel();
+
+  StudentRequiredInformationsRequestModel.fromUser(User? user) {
+    age = user?.age ?? 0;
+    phone = user?.phone ?? '';
+    name = user?.name ?? '';
+    gender = user?.gender ?? Gender.female;
+    province = Province(id: user?.provinceId ?? 1, name: '');
+  }
 
   @override
   Map<String, dynamic> toJson() {
@@ -53,9 +64,19 @@ class RecruiterRequiredInformationsRequestModel
   String name = '';
   String district = '';
   String ward = '';
+  String website = '';
   File? companyImage;
   File? avatar;
   Province? province;
+
+  RecruiterRequiredInformationsRequestModel();
+
+  RecruiterRequiredInformationsRequestModel.fromUser(User? user) {
+    phone = user?.phone ?? '';
+    companyName = user?.companyName ?? '';
+    name = user?.name ?? '';
+    province = Province(id: user?.provinceId ?? 1, name: '');
+  }
 
   @override
   Map<String, dynamic> toJson() {
@@ -69,6 +90,7 @@ class RecruiterRequiredInformationsRequestModel
       ApiParameter.ward: ward,
       ApiParameter.avatar: avatar,
       ApiParameter.name: name,
+      ApiParameter.website: website,
     };
   }
 

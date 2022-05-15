@@ -80,6 +80,22 @@ Widget buildNetworkImage(String url, {bool coverPlaceholder = false}) {
       return Image.asset(ImagePaths.companyPlaceholderImage,
           fit: coverPlaceholder ? BoxFit.cover : BoxFit.contain);
     },
+    placeholderErrorBuilder: (context, error, stackTrace) {
+      return Image.asset(ImagePaths.companyPlaceholderImage,
+          fit: coverPlaceholder ? BoxFit.cover : BoxFit.contain);
+    },
+    fit: BoxFit.cover,
+  );
+}
+
+Widget buildFileImage(File? file, {bool coverPlaceholder = false}) {
+  return FadeInImage(
+    image: FileImage(file ?? File('')),
+    placeholder: const AssetImage(ImagePaths.companyPlaceholderImage),
+    imageErrorBuilder: (context, error, stackTrace) {
+      return Image.asset(ImagePaths.companyPlaceholderImage,
+          fit: coverPlaceholder ? BoxFit.cover : BoxFit.contain);
+    },
     fit: BoxFit.cover,
   );
 }

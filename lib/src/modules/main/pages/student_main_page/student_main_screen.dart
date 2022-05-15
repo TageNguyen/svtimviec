@@ -92,9 +92,9 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
       floating: true,
       elevation: 0,
       actions: [
-        // Tin đã lưu
         IconButton(
           onPressed: () {
+            // move to saved posts page
             Navigator.pushNamed(context, RouteNames.savedPosts);
           },
           icon: const Icon(
@@ -103,9 +103,9 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
           ),
           tooltip: AppStrings.savedRecruitmentPosts,
         ),
-        // Thông tin người dùng
         IconButton(
           onPressed: () {
+            // move to profile page
             Navigator.pushNamed(context, RouteNames.profile);
           },
           icon: _buildUserAvatar(context),
