@@ -35,6 +35,7 @@ class UpdateRequiredInformationsBloC extends BloC {
   set companyImage(File file) {
     _companyImageObject.add(file);
     recruiterRequestModel.companyImage = file;
+    updateButtonStatus();
   }
 
   Future<void> updateRequiredInformations() async {
