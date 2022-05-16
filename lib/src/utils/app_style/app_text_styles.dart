@@ -19,4 +19,19 @@ class AppTextStyles {
     fontWeight: FontWeight.bold,
     fontSize: kDefaultFontSize,
   );
+  static const whiteRegular = TextStyle(
+    color: AppColors.white,
+    fontWeight: FontWeight.w400,
+    fontSize: kDefaultFontSize,
+  );
+  static const greyRegular = TextStyle(
+    color: AppColors.grey,
+    fontWeight: FontWeight.w400,
+    fontSize: kDefaultFontSize,
+  );
+  static const defaultMedium = TextStyle(
+    color: AppColors.black,
+    fontWeight: FontWeight.w500,
+    fontSize: kDefaultFontSize,
+  );
 }
