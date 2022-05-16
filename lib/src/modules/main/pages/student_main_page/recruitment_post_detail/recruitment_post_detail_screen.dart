@@ -32,46 +32,12 @@ class RecruitmentPostDetailScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 RecruitmentPost post = snapshot.data!;
                 return SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0, vertical: 24.0),
+                  padding: const EdgeInsets.only(bottom: 24.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       _buildCompanyImage(context, post.recruiter?.companyImage),
-                      Text(
-                        '${post.createdAt?.ddmmyyyy}',
-                        style: AppTextStyles.greyRegular.copyWith(fontSize: 14),
-                      ),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        '${post.recruiter?.companyName} ${AppStrings.hire}: ',
-                        style: AppTextStyles.defaultSemibold,
-                      ),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        post.jobName,
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                      const SizedBox(height: 4.0),
-                      Text(
-                        post.jobDescription,
-                      ),
-                      const SizedBox(height: 4.0),
-                      _buildSalaryInformations(context, post),
-                      const SizedBox(height: 4.0),
-                      _buildRequiredInformations(context, post),
-                      const SizedBox(height: 12.0),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: _buildRecruiterInformations(
-                            context, post.recruiter),
-                      ),
-                      const SizedBox(height: 4.0),
-                      _buildContactAddress(context, post),
-                      const SizedBox(height: 16.0),
-                      _buildButtons(context),
-                      const SizedBox(height: 16.0),
-                      RecruitmentPostComment(listReport: post.reports ?? []),
+                      _buildPostInformations(context, post),
                     ],
                   ),
                 );
@@ -84,6 +50,50 @@ class RecruitmentPostDetailScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildPostInformations(BuildContext context, RecruitmentPost post) {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            '${post.createdAt?.ddmmyyyy}',
+            style: AppTextStyles.greyRegular.copyWith(fontSize: 14),
+          ),
+          const SizedBox(height: 8.0),
+          Text(
+            '${post.recruiter?.companyName} ${AppStrings.hire}: ',
+            style: AppTextStyles.defaultSemibold,
+          ),
+          const SizedBox(height: 8.0),
+          Text(
+            post.jobName,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          const SizedBox(height: 4.0),
+          Text(
+            post.jobDescription,
+          ),
+          const SizedBox(height: 4.0),
+          _buildSalaryInformations(context, post),
+          const SizedBox(height: 4.0),
+          _buildRequiredInformations(context, post),
+          const SizedBox(height: 12.0),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: _buildRecruiterInformations(context, post.recruiter),
+          ),
+          const SizedBox(height: 4.0),
+          _buildContactAddress(context, post),
+          const SizedBox(height: 16.0),
+          _buildButtons(context),
+          const SizedBox(height: 16.0),
+          RecruitmentPostComment(listReport: post.reports ?? []),
+        ],
       ),
     );
   }

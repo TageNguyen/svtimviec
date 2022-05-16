@@ -27,9 +27,10 @@ class ListCandidatesScreen extends StatelessWidget {
           if (candidates.isEmpty) {
             return emptyMessage;
           }
-          return ListView.builder(
+          return ListView.separated(
             padding: const EdgeInsets.all(16.0),
             itemCount: candidates.length,
+            separatorBuilder: (_, __) => const SizedBox(height: 10.0),
             itemBuilder: (context, index) {
               return CandidateItem(candidate: candidates[index]);
             },
