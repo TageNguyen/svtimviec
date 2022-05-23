@@ -312,7 +312,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   void pickAge() {
     showCupertinoBottomPicker<int>(
       context,
-      listData: [for (var i = 1; i <= 100; i++) i],
+      listData: [for (var i = 18; i <= 100; i++) i],
       item: (age) => Text('$age'),
       initialItem: int.tryParse(_ageController.text),
     ).then((age) {
