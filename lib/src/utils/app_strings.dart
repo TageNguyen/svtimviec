@@ -107,4 +107,8 @@ class AppStrings {
   static const confirmNewPassword = 'Xác nhận mật khẩu mới';
   static const changePasswordSuccessfullyPleaseLoginAgainToUseApp =
       'Đổi mật khẩu thành công, vui lòng đăng nhập lại để sử dụng ứng dụng';
+  static const filter = 'Bộ lọc';
+  static const applyFilter = 'Áp dụng bộ lọc';
+  static const ageGreaterThanTwenty = 'Tuổi >= 20';
+  static const salaryGreaterThanThreeMillions = 'Lương >= 3,000,000 đ';
 }
