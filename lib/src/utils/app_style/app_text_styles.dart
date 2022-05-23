@@ -19,6 +19,11 @@ class AppTextStyles {
     fontWeight: FontWeight.bold,
     fontSize: kDefaultFontSize,
   );
+  static const darkBlueBold = TextStyle(
+    color: AppColors.darkBlue,
+    fontWeight: FontWeight.bold,
+    fontSize: kDefaultFontSize,
+  );
   static const whiteRegular = TextStyle(
     color: AppColors.white,
     fontWeight: FontWeight.w400,

@@ -7,4 +7,5 @@ class ImagePaths {
       'assets/images/company_placeholder_image.png';
   static const homeBackGround = 'assets/images/img_home_background.png';
   static const iconSearch = 'assets/images/icon_search.png';
+  static const iconFilter = 'assets/images/icon_filter.png';
 }

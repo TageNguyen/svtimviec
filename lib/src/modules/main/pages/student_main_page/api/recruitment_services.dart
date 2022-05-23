@@ -24,7 +24,7 @@ class RecruitmentServices extends RecruitmentApi {
         ApiParameter.salaryFrom: '${salaryFrom ?? ''}',
         ApiParameter.salaryTo: '${salaryTo ?? ''}',
         ApiParameter.minAge: '${minAge ?? ''}',
-        ApiParameter.sex: '${gender?.rawData ?? 2}',
+        ApiParameter.sex: '${gender?.rawData ?? ''}',
         ApiParameter.search: keyword,
         ApiParameter.perPage: '$kDefaultPageSize',
       },
