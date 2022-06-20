@@ -99,6 +99,7 @@ class StudentMainPageBloC extends BloC {
     // salary from
     if (isRequiredSalaryGreaterThanThreeMillions) {
       _salaryFrom = 3000000;
+      _salaryType = SalaryType.fixed;
     } else {
       _salaryFrom = null;
     }
